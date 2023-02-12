@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Player {
 
-    GamePanel gamePanel ;
+    GamePanel gamePanel;
     private int worldX = 10;
     private int worldY = 10;
     private int speed = 30;
@@ -14,10 +14,28 @@ public class Player {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 
     public Player(GamePanel gamePanel) {
-        this.gamePanel= gamePanel;
+        ImageLoader.setup("/NHD1", gamePanel.tileSize, gamePanel.tileSize);
+        this.gamePanel = gamePanel;
     }
+
     public void movePLayer(int x, int y) {
+        if (getWorldX() != gamePanel.mouse.mouseX || getWorldY() != gamePanel.mouse.mouseY) {
+            if (gamePanel.mouse.mouseX < getWorldX()) {
+                setWorldX(getWorldX() - 1);
+            }
+            if (gamePanel.mouse.mouseX > getWorldX()) {
+                setWorldX(getWorldX() + 1);
+            }
+            if (gamePanel.mouse.mouseY < getWorldY()) {
+                setWorldY(getWorldY() - 1);
+            }
+            if (gamePanel.mouse.mouseY > getWorldY()) {
+                setWorldY(getWorldY() + 1);
+            }
+        }
     }
+
+
     public int getWorldX() {
         return worldX;
     }

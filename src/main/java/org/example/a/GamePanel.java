@@ -2,6 +2,7 @@ package org.example.a;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -12,9 +13,8 @@ public class GamePanel extends JPanel implements Runnable {
     public int maxScreenCol, maxScreenRow;
     public Thread gameThread;
     public Player player;
+    public Player2 player2 = new Player2(this);
     Mouse mouse = new Mouse(this);
-
-    int worldx =10,worldy =10;
 
     {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -39,50 +39,23 @@ public class GamePanel extends JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currentTime;
 
+        //while player move
         while (gameThread != null) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
             if (delta >= 1) {
-                repaint();
                 update();
+                repaint();
                 delta--;
             }
         }
     }
 
     public void update() {
-        double drawInterval = 1000000000 / 60;
-        double delta = 0;
+        player.movePLayer(mouse.mouseX, mouse.mouseY);
+        player2.movePLayer();
 
-        long lastTime = System.nanoTime();
-        long currentTime;
-
-        while ((this.player.getWorldX() != mouse.mouseX || this.player.getWorldY() != mouse.mouseY ) || gameThread != null) {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
-            if (delta >= 1) {
-                if (this.player.getWorldX() != mouse.mouseX || this.player.getWorldY() != mouse.mouseY) {
-                    if (mouse.mouseX < player.getWorldX()) {
-                        player.setWorldX(player.getWorldX() - 1);
-                    }
-                    if (mouse.mouseX > player.getWorldX()) {
-                        player.setWorldX(player.getWorldX() + 1);
-                    }
-                    if (mouse.mouseY < player.getWorldY()) {
-                        player.setWorldY(player.getWorldY() - 1);
-                    }
-                    if (mouse.mouseY > player.getWorldY()) {
-                        player.setWorldY(player.getWorldY() + 1);
-                    }
-                }
-                worldx++;
-                worldy++;
-                repaint();
-                delta--;
-            }
-        }
     }
 
     public void paintComponent(Graphics g) {
@@ -90,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(41, 24, 42));
         g2.drawString("OYO", player.getWorldX(), player.getWorldY());
-        g2.drawString("XOX",worldx,worldy);
+        g2.drawString("XOX", player2.worldX, player2.worldY);
         g2.dispose();
     }
 
