@@ -7,7 +7,7 @@ import javax.swing.*;
 class Mouse implements MouseListener {
 
 
-    int mouseX;
+    int mouseX ;
     int mouseY;
 
     boolean isPressed = false;
@@ -16,6 +16,9 @@ class Mouse implements MouseListener {
 
     Mouse(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        mouseX=gamePanel.player.getWorldX();
+        mouseY=gamePanel.player.getWorldY();
+
     }
 
     public void mousePressed(MouseEvent e) {
