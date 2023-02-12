@@ -25,7 +25,7 @@ public class Player2 {
     }
 
     public void movePLayer() {
-        if ((worldX != goalX && worldY != goalY)) {
+        if ((worldX != goalX || worldY != goalY)) {
             if (goalX < worldX) {
                 worldX -= speed;
             }
