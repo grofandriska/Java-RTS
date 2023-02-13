@@ -20,11 +20,24 @@ class Mouse implements MouseListener {
         mouseY=gamePanel.player.getWorldY();
 
     }
+//public void selectAndMove (MouseEvent me){
+//    Rectangle cursor = new Rectangle(me.getX(),me.getY(),6,6);
+//
+//    If(cursor.intersects(gamePamel.getPlayer().getSolidAre() && me.getClick(Button1)){
+//       cursor = null;
+//       gamePanel.getPlayer().setIsClicked(true);
+//    } else {gamePanel.getPlayer().setIsClicked(false);}
+//.   if (me.get(MouseButton2) && gamePanel.getPlayer().getIsClicked()){
+//.   gamePanel.getPlayer().setGoalX(me.getX());
+//.   gamePanel.getPlayer().setGoalY(me.getY());
+//.   }
+
+
+
+
 
     public void mousePressed(MouseEvent e) {
-        isPressed = true;
-        mouseX = e.getX();
-        mouseY = e.getY();
+       selectAndMove(e);
     }
 
     public void mouseReleased(MouseEvent e) {
