@@ -4,20 +4,21 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player {
-//Boolean isSelected=false;
 
-    GamePanel gamePanel;
+    private boolean isSelected ;
+    private GamePanel gamePanel;
     private int worldX, worldY, speed,goalX,goalY;
     private BufferedImage image;
-    public Rectangle solidArea;
+    private Rectangle solidArea;
 
     {
+        this.isSelected = false;
         this.worldX = 160;
         this.worldY = 160;
-        this.goalX = worldX;
-        this.goalY = worldY;
+        this.goalX = this.worldX;
+        this.goalY = this.worldY;
         this.image = ImageLoader.setup("/NHD1", 48,48);
-        this.solidArea = new Rectangle(worldX, worldY, 48, 48);
+        this.solidArea = new Rectangle(this.worldX, this.worldY, 48, 48);
     }
 
     public Player(GamePanel gamePanel) {
@@ -25,22 +26,42 @@ public class Player {
     }
 
     public void movePLayer() {
-        if (getWorldX() != goalX || getWorldY() != goalY) {
-            if (x < getWorldX()) {
+        if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
+            gamePanel.getUi().showClick(gamePanel.getMouse().getMouseX(),gamePanel.getMouse().getMouseY());
+            if (getGoalX() < getWorldX()) {
                 setWorldX(getWorldX() - 1);
-//Rectangle.x = getWorldX()
+                getSolidArea().x = getWorldX();
             }
-            if (x > getWorldX()) {
+            if (getGoalX() > getWorldX()) {
                 setWorldX(getWorldX() + 1);
+                getSolidArea().x = getWorldX();
             }
-            if (y < getWorldY()) {
+            if (getGoalY() < getWorldY()) {
                 setWorldY(getWorldY() - 1);
-//Rectangle.y = getWorldY()
+                getSolidArea().y = getWorldY();
             }
-            if (y > getWorldY()) {
+            if (getGoalY() > getWorldY()) {
                 setWorldY(getWorldY() + 1);
+                getSolidArea().y = getWorldY();
             }
         }
+    }
+
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 
     public int getWorldX() {
@@ -67,11 +88,35 @@ public class Player {
         this.speed = speed;
     }
 
+    public int getGoalX() {
+        return goalX;
+    }
+
+    public void setGoalX(int goalX) {
+        this.goalX = goalX;
+    }
+
+    public int getGoalY() {
+        return goalY;
+    }
+
+    public void setGoalY(int goalY) {
+        this.goalY = goalY;
+    }
+
     public BufferedImage getImage() {
         return image;
     }
 
     public void setImage(BufferedImage image) {
         this.image = image;
+    }
+
+    public Rectangle getSolidArea() {
+        return solidArea;
+    }
+
+    public void setSolidArea(Rectangle solidArea) {
+        this.solidArea = solidArea;
     }
 }

@@ -11,7 +11,7 @@ public class Main {
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Jump");
+        window.setTitle("Explore");
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);

@@ -6,20 +6,21 @@ import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public int originalTileSize, scale, tileSize;
-    public int maxScreenCol, maxScreenRow, screenWidth, screenHeight;
-    public Thread gameThread;
-    public Player player;
-    public Player2 player2;
-    public Mouse mouse;
+    private int originalTileSize, scale, tileSize;
+    private int maxScreenCol, maxScreenRow, screenWidth, screenHeight;
+    private Thread gameThread;
+    private Player player;
+    private Player2 player2;
+    private Mouse mouse;
+    private UI ui;
 
     {
         scale = 3;
         originalTileSize = 16;
         tileSize = originalTileSize * scale;
+
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
-
         graphicsDevice.setFullScreenWindow(Main.window);
 
         this.screenWidth = Main.window.getWidth();
@@ -32,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.player2 = new Player2(this);
         this.mouse = new Mouse(this);
 
-
+        this.ui = new UI(this);
     }
 
     public GamePanel() {
@@ -41,7 +42,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addMouseListener(mouse);
         this.setFocusable(true);
-
     }
 
     @Override
@@ -80,8 +80,8 @@ public class GamePanel extends JPanel implements Runnable {
         //draw background
         int x = 0;
         int y = 0;
-        for (int i = 0; i < maxScreenRow + 1; i++) {
-            for (int k = 0; k < maxScreenCol + 1; k++) {
+        for (int i = 0; i < maxScreenRow +1; i++) {
+            for (int k = 0; k < maxScreenCol ; k++) {
                 g2.drawImage(image, x, y, null);
                 x += tileSize;
             }
@@ -89,39 +89,121 @@ public class GamePanel extends JPanel implements Runnable {
             y += tileSize;
         }
 
-        //draw util 
-        g2.setColor(new Color(0, 0, 0, 145));
-
-        g2.fillRoundRect(0, 0, 400, 220, 0, 0);
-     
-        g2.setColor(new Color(255, 255, 255));
-        g2.setFont(new Font("arial", Font.BOLD, 20));
-
-        g2.drawString("npc goal -x " + player2.goalX , 20, 30);
-        g2.drawString("npc goal -y " + player2.goalY , 20, 60);
-
-        g2.drawString("npc -x " + player2.worldX , 250, 30);
-        g2.drawString("npc -y " + player2.worldY , 250, 60);
-
-
-
-
-        g2.drawString("player goal -x " + mouse.mouseX , 20, 120);
-        g2.drawString("player goal -y " + mouse.mouseY , 20, 150);
-
-        g2.drawString("player -x " + player.getWorldX() , 250, 120);
-        g2.drawString("player -y " + player.getWorldY() , 250, 150);
+        ui.drawUtil(g2);
 
         //draw players
-        g2.drawImage(player2.image, player2.worldX, player2.worldY, null);
+        g2.drawImage(player2.getImage(), player2.getWorldX(), player2.getWorldY(), null);
+        if (player.isSelected()){
+            g2.setColor(new Color(0,0,0,190));
+            g2.drawRoundRect(player.getWorldX()+9,player.getWorldY()+25,30,30,30,30);
+            g2.setColor(new Color(150,10,10,125));
+            g2.fillRoundRect(player.getWorldX()+9,player.getWorldY()+25,30,30,30,30);
+        }
         g2.drawImage(player.getImage(), player.getWorldX(), player.getWorldY(), null);
 
         g2.dispose();
+
     }
 
     public void startGameThread() {
         this.gameThread = new Thread(this);
         this.gameThread.start();
+    }
+
+    public int getOriginalTileSize() {
+        return originalTileSize;
+    }
+
+    public void setOriginalTileSize(int originalTileSize) {
+        this.originalTileSize = originalTileSize;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public void setTileSize(int tileSize) {
+        this.tileSize = tileSize;
+    }
+
+    public int getMaxScreenCol() {
+        return maxScreenCol;
+    }
+
+    public void setMaxScreenCol(int maxScreenCol) {
+        this.maxScreenCol = maxScreenCol;
+    }
+
+    public int getMaxScreenRow() {
+        return maxScreenRow;
+    }
+
+    public void setMaxScreenRow(int maxScreenRow) {
+        this.maxScreenRow = maxScreenRow;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public void setScreenWidth(int screenWidth) {
+        this.screenWidth = screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public void setScreenHeight(int screenHeight) {
+        this.screenHeight = screenHeight;
+    }
+
+    public Thread getGameThread() {
+        return gameThread;
+    }
+
+    public void setGameThread(Thread gameThread) {
+        this.gameThread = gameThread;
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public void setUi(UI ui) {
+        this.ui = ui;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player2 getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(Player2 player2) {
+        this.player2 = player2;
+    }
+
+    public Mouse getMouse() {
+        return mouse;
+    }
+
+    public void setMouse(Mouse mouse) {
+        this.mouse = mouse;
     }
 }
 

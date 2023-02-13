@@ -2,62 +2,74 @@ package org.example.a;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
 class Mouse implements MouseListener {
-
-
-    int mouseX ;
-    int mouseY;
-
-    boolean isPressed = false;
-
-    GamePanel gamePanel;
+    private Integer mouseX,mouseY;
+    private GamePanel gamePanel;
 
     Mouse(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        mouseX=gamePanel.player.getWorldX();
-        mouseY=gamePanel.player.getWorldY();
-
     }
-//public void selectAndMove (MouseEvent me){
-//    Rectangle cursor = new Rectangle(me.getX(),me.getY(),6,6);
-//
-//    If(cursor.intersects(gamePamel.getPlayer().getSolidAre() && me.getClick(Button1)){
-//       cursor = null;
-//       gamePanel.getPlayer().setIsClicked(true);
-//    } else {gamePanel.getPlayer().setIsClicked(false);}
-//.   if (me.get(MouseButton2) && gamePanel.getPlayer().getIsClicked()){
-//.   gamePanel.getPlayer().setGoalX(me.getX());
-//.   gamePanel.getPlayer().setGoalY(me.getY());
-//.   }
 
+    public void selectAndMove(MouseEvent me) {
+        Rectangle cursor = new Rectangle(me.getX(), me.getY(), 10, 10);
+        if (cursor.intersects(gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            gamePanel.getPlayer().setSelected(true);
+            cursor = null;
+        } else if (!cursor.intersects(gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            gamePanel.getPlayer().setSelected(false);
+            cursor = null;
+        } else if (me.getButton() == MouseEvent.BUTTON3 && gamePanel.getPlayer().isSelected()) {
+            mouseX = me.getX();
+            mouseY = me.getY();
+            gamePanel.getPlayer().setGoalX(me.getX() - 22);
+            gamePanel.getPlayer().setGoalY(me.getY() - 22);
 
-
+        }
+    }
 
 
     public void mousePressed(MouseEvent e) {
-       selectAndMove(e);
+        selectAndMove(e);
     }
 
     public void mouseReleased(MouseEvent e) {
-        System.out.println("mouse released at point:"
-                + e.getX() + " " + e.getY());
+
     }
 
     public void mouseExited(MouseEvent e) {
-        System.out.println("mouse exited through point:"
-                + e.getX() + " " + e.getY());
+
     }
 
     public void mouseEntered(MouseEvent e) {
-        System.out.println("mouse entered at point:"
-                + e.getX() + " " + e.getY());
+
     }
 
     public void mouseClicked(MouseEvent e) {
-        System.out.println("mouse clicked at point:"
-                + e.getX() + " "
-                + e.getY() + "mouse clicked :" + e.getClickCount());
+
+    }
+
+    public Integer getMouseX() {
+        return mouseX;
+    }
+
+    public void setMouseX(Integer mouseX) {
+        this.mouseX = mouseX;
+    }
+
+    public Integer getMouseY() {
+        return mouseY;
+    }
+
+    public void setMouseY(Integer mouseY) {
+        this.mouseY = mouseY;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 }
