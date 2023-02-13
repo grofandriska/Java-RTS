@@ -7,24 +7,25 @@ public class Player {
 //Boolean isSelected=false;
 
     GamePanel gamePanel;
-    private int worldX, worldY, speed;
+    private int worldX, worldY, speed,goalX,goalY;
     private BufferedImage image;
     public Rectangle solidArea;
 
     {
         this.worldX = 160;
         this.worldY = 160;
+        this.goalX = worldX;
+        this.goalY = worldY;
         this.image = ImageLoader.setup("/NHD1", 48,48);
-// Rectangle (worldX,worldY)
-        this.solidArea = new Rectangle(0, 0, 48, 48);
+        this.solidArea = new Rectangle(worldX, worldY, 48, 48);
     }
 
     public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
-    public void movePLayer(int x, int y) {
-        if (getWorldX() != gamePanel.mouse.mouseX || getWorldY() != gamePanel.mouse.mouseY) {
+    public void movePLayer() {
+        if (getWorldX() != goalX || getWorldY() != goalY) {
             if (x < getWorldX()) {
                 setWorldX(getWorldX() - 1);
 //Rectangle.x = getWorldX()
