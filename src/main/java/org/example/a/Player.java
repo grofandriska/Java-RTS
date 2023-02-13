@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player {
+//Boolean isSelected=false;
 
     GamePanel gamePanel;
     private int worldX, worldY, speed;
@@ -14,6 +15,7 @@ public class Player {
         this.worldX = 160;
         this.worldY = 160;
         this.image = ImageLoader.setup("/NHD1", 48,48);
+// Rectangle (worldX,worldY)
         this.solidArea = new Rectangle(0, 0, 48, 48);
     }
 
@@ -25,12 +27,14 @@ public class Player {
         if (getWorldX() != gamePanel.mouse.mouseX || getWorldY() != gamePanel.mouse.mouseY) {
             if (x < getWorldX()) {
                 setWorldX(getWorldX() - 1);
+//Rectangle.x = getWorldX()
             }
             if (x > getWorldX()) {
                 setWorldX(getWorldX() + 1);
             }
             if (y < getWorldY()) {
                 setWorldY(getWorldY() - 1);
+//Rectangle.y = getWorldY()
             }
             if (y > getWorldY()) {
                 setWorldY(getWorldY() + 1);
