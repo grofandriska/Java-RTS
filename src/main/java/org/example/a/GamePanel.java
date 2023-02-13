@@ -14,6 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
     private Mouse mouse;
     private UI ui;
 
+    private Sound sound;
+
     {
         scale = 3;
         originalTileSize = 16;
@@ -33,7 +35,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.player2 = new Player2(this);
         this.mouse = new Mouse(this);
 
+        this.sound = new Sound();
         this.ui = new UI(this);
+    }
+
+    public void playSoundEffect(int i) {
+        sound.setFile(i);
+        sound.play();
     }
 
     public GamePanel() {

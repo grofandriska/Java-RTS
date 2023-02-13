@@ -34,14 +34,13 @@ public class UI {
         g2.drawString("player -x " + gamePanel.getPlayer().getWorldX(), 250, 120);
         g2.drawString("player -y " + gamePanel.getPlayer().getWorldY(), 250, 150);
     }
-
     public void showClick(Integer x, Integer y) {
         if (getGamePanel().getMouse().getMouseX() != null && getGamePanel().getMouse().getMouseX() != null) {
             if (clickDrawCounter != 30) {
-                g2.setColor(new Color(120, 160, 190, 245));
+                g2.setColor(new Color(0, 0, 0 ));
                 g2.drawRoundRect(x, y, 15, 15, 3, 3);
 
-                g2.setColor(new Color(60, 160, 190, 245));
+                g2.setColor(new Color(0, 0, 190));
                 g2.fillRoundRect(x, y, 15, 15, 3, 3);
                 clickDrawCounter++;
                 System.out.println(clickDrawCounter);
@@ -56,7 +55,6 @@ public class UI {
     public GamePanel getGamePanel() {
         return gamePanel;
     }
-
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }

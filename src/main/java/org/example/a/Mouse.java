@@ -14,6 +14,7 @@ class Mouse implements MouseListener {
     public void selectAndMove(MouseEvent me) {
         Rectangle cursor = new Rectangle(me.getX(), me.getY(), 10, 10);
         if (cursor.intersects(gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            gamePanel.playSoundEffect(3);
             gamePanel.getPlayer().setSelected(true);
             cursor = null;
         } else if (!cursor.intersects(gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
@@ -22,6 +23,7 @@ class Mouse implements MouseListener {
         } else if (me.getButton() == MouseEvent.BUTTON3 && gamePanel.getPlayer().isSelected()) {
             mouseX = me.getX();
             mouseY = me.getY();
+            gamePanel.playSoundEffect(1);
             gamePanel.getPlayer().setGoalX(me.getX() - 22);
             gamePanel.getPlayer().setGoalY(me.getY() - 22);
 
