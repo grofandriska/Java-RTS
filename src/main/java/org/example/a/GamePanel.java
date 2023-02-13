@@ -65,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.movePLayer(mouse.mouseX - 25, mouse.mouseY - 25);
+        player.movePLayer();
         player2.movePLayer();
     }
 
@@ -88,10 +88,12 @@ public class GamePanel extends JPanel implements Runnable {
             x = 0;
             y += tileSize;
         }
+
+        //draw util 
         g2.setColor(new Color(0, 0, 0, 145));
 
         g2.fillRoundRect(0, 0, 400, 220, 0, 0);
-        //draw player
+     
         g2.setColor(new Color(255, 255, 255));
         g2.setFont(new Font("arial", Font.BOLD, 20));
 
@@ -110,7 +112,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawString("player -x " + player.getWorldX() , 250, 120);
         g2.drawString("player -y " + player.getWorldY() , 250, 150);
 
-
+        //draw players
         g2.drawImage(player2.image, player2.worldX, player2.worldY, null);
         g2.drawImage(player.getImage(), player.getWorldX(), player.getWorldY(), null);
 
