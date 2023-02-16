@@ -49,7 +49,6 @@ public class Player {
         }
     }
 
-
     public boolean isSelected() {
         return isSelected;
     }

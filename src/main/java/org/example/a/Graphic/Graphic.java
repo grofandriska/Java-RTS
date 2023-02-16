@@ -28,9 +28,9 @@ public class Graphic {
         }
         if (getGamePanel().getPlayer2().isSelected()) {
             g2.setColor(new Color(0, 0, 0, 190));
-            g2.drawRoundRect(getGamePanel().getPlayer2().getWorldX() + 9, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
+            g2.drawRoundRect(getGamePanel().getPlayer2().getWorldX() +5, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
             g2.setColor(new Color(150, 90, 10, 125));
-            g2.fillRoundRect(getGamePanel().getPlayer2().getWorldX() + 9, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
+            g2.fillRoundRect(getGamePanel().getPlayer2().getWorldX() +5, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
         }
     }
 

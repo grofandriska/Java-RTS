@@ -29,14 +29,14 @@ public class Map {
     }
 
     public void loadTileArray() {
-        setup(0, "Grass1", false);
+        setup(0, "g2", false);
     }
 
     public void setup(int index, String imagePath, boolean collision) {
         try {
             tiles[index] = new Tile();
             tiles[index].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/" + imagePath + ".png")));
-            tiles[index].setImage(ImageLoader.scaleImage(tiles[index].getImage(), gamePanel.getTileSize(), gamePanel.getTileSize()));
+            tiles[index].setImage(ImageLoader.scaleImage(tiles[index].getImage(), tiles[index].getImageWidth(), tiles[index].getImageHeight()));
             tiles[index].setCollision(collision);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -62,7 +62,7 @@ public class Map {
         while (worldCol < gamePanel.getMaxScreenCol() && worldRow < gamePanel.getMaxScreenRow()+1) {
             int tileNum = mapTileNum[worldCol][worldRow];
 
-            g.drawImage(tiles[tileNum].getImage(), screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+            g.drawImage(tiles[tileNum].getImage(), screenX, screenY,tiles[tileNum].getImageWidth(), tiles[tileNum].getImageHeight(), null);
             g.setColor(new Color(0, 0, 0));
             g.drawString(String.valueOf(counter), screenX + 20, screenY + 20);
             g.setColor(new Color(255, 0, 0));
