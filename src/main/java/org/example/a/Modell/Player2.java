@@ -1,4 +1,7 @@
-package org.example.a;
+package org.example.a.Modell;
+
+import org.example.a.Graphic.ImageLoader;
+import org.example.a.JPanel.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,6 +9,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Player2 {
     private GamePanel gamePanel;
+
+    private boolean isSelected = false;
+
     private int goalX, goalY, speed, worldX, worldY;
     private BufferedImage image;
     private Rectangle solidArea;
@@ -16,7 +22,7 @@ public class Player2 {
         this.goalX = worldX;
         this.goalY = worldY;
         this.speed = 1;
-        this.solidArea = new Rectangle(0, 0, 48, 48);
+        this.solidArea = new Rectangle(worldX, worldY, 48, 48);
     }
 
     public Player2(GamePanel gamePanel) {
@@ -28,18 +34,22 @@ public class Player2 {
         if ((this.worldX != this.goalX || this.worldY != this.goalY)) {
             if (this.goalX < this.worldX) {
                 this.worldX -= this.speed;
+                this.solidArea.x = worldX;
             }
              if (goalX > worldX) {
                 this.worldX += this.speed;
+                 this.solidArea.x = worldX;
             }
             if (goalY < worldY) {
                 this.worldY -= this.speed;
+                this.solidArea.y = worldY;
             }
             if (goalY > worldY) {
                 this.worldY += this.speed;
+                this.solidArea.y = worldY;
             }
         }
-        else generateNewGoal();
+        /*else generateNewGoal();*/
     }
     public void generateNewGoal(){
         this.goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
@@ -60,6 +70,14 @@ public class Player2 {
 
     public void setGoalX(int goalX) {
         this.goalX = goalX;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public int getGoalY() {

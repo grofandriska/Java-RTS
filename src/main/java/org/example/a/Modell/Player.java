@@ -1,4 +1,7 @@
-package org.example.a;
+package org.example.a.Modell;
+
+import org.example.a.Graphic.ImageLoader;
+import org.example.a.JPanel.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,7 +30,6 @@ public class Player {
 
     public void movePLayer() {
         if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
-            gamePanel.getUi().showClick(gamePanel.getMouse().getMouseX(),gamePanel.getMouse().getMouseY());
             if (getGoalX() < getWorldX()) {
                 setWorldX(getWorldX() - 1);
                 getSolidArea().x = getWorldX();

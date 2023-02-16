@@ -1,4 +1,12 @@
-package org.example.a;
+package org.example.a.JPanel;
+
+import org.example.a.*;
+import org.example.a.Graphic.Graphic;
+import org.example.a.Graphic.ImageLoader;
+import org.example.a.Modell.Player;
+import org.example.a.Modell.Player2;
+import org.example.a.Mouse.Mouse;
+import org.example.a.Sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
     private Player2 player2;
     private Mouse mouse;
-    private UI ui;
-
+    private Graphic graphic;
     private Sound sound;
 
     {
@@ -25,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable {
         GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
         graphicsDevice.setFullScreenWindow(Main.window);
 
+        this.graphic = new Graphic(this);
+
         this.screenWidth = Main.window.getWidth();
         this.screenHeight = Main.window.getHeight();
 
@@ -34,9 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.player = new Player(this);
         this.player2 = new Player2(this);
         this.mouse = new Mouse(this);
-
         this.sound = new Sound();
-        this.ui = new UI(this);
     }
 
     public void playSoundEffect(int i) {
@@ -44,11 +51,16 @@ public class GamePanel extends JPanel implements Runnable {
         sound.play();
     }
 
+    public void stopMusic() {
+        sound.stop();
+    }
+
     public GamePanel() {
-        this.setPreferredSize(new Dimension((this.maxScreenCol * this.tileSize), ((this.maxScreenRow * this.tileSize))));
+        this.setPreferredSize(new Dimension((this.maxScreenCol * this.tileSize), (int) ((this.maxScreenRow + 0.5) * this.tileSize)));
         this.setBackground(Color.ORANGE);
         this.setDoubleBuffered(true);
         this.addMouseListener(mouse);
+        this.addMouseMotionListener(mouse);
         this.setFocusable(true);
     }
 
@@ -77,6 +89,14 @@ public class GamePanel extends JPanel implements Runnable {
         player2.movePLayer();
     }
 
+    public Sound getSound() {
+        return sound;
+    }
+
+    public void setSound(Sound sound) {
+        this.sound = sound;
+    }
+
     public void paintComponent(Graphics g) {
 
         //setup
@@ -88,8 +108,8 @@ public class GamePanel extends JPanel implements Runnable {
         //draw background
         int x = 0;
         int y = 0;
-        for (int i = 0; i < maxScreenRow +1; i++) {
-            for (int k = 0; k < maxScreenCol ; k++) {
+        for (int i = 0; i < maxScreenRow + 1; i++) {
+            for (int k = 0; k < maxScreenCol; k++) {
                 g2.drawImage(image, x, y, null);
                 x += tileSize;
             }
@@ -97,16 +117,14 @@ public class GamePanel extends JPanel implements Runnable {
             y += tileSize;
         }
 
-        ui.drawUtil(g2);
+        graphic.drawUtil(g2);
+
+        graphic.drawDragMark(g2);
+        graphic.drawRectangle(g2);
 
         //draw players
         g2.drawImage(player2.getImage(), player2.getWorldX(), player2.getWorldY(), null);
-        if (player.isSelected()){
-            g2.setColor(new Color(0,0,0,190));
-            g2.drawRoundRect(player.getWorldX()+9,player.getWorldY()+25,30,30,30,30);
-            g2.setColor(new Color(150,10,10,125));
-            g2.fillRoundRect(player.getWorldX()+9,player.getWorldY()+25,30,30,30,30);
-        }
+
         g2.drawImage(player.getImage(), player.getWorldX(), player.getWorldY(), null);
 
         g2.dispose();
@@ -182,12 +200,12 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameThread = gameThread;
     }
 
-    public UI getUi() {
-        return ui;
+    public Graphic getGraphic() {
+        return graphic;
     }
 
-    public void setUi(UI ui) {
-        this.ui = ui;
+    public void setGraphic(Graphic graphic) {
+        this.graphic = graphic;
     }
 
     public Player getPlayer() {

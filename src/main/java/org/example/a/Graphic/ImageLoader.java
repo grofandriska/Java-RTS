@@ -1,4 +1,4 @@
-package org.example.a;
+package org.example.a.Graphic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -27,5 +27,4 @@ public class ImageLoader {
         }
         return image;
     }
-
 }

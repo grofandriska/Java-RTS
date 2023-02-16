@@ -1,4 +1,4 @@
-package org.example.a;
+package org.example.a.Sound;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

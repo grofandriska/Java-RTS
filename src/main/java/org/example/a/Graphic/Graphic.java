@@ -1,8 +1,11 @@
-package org.example.a;
+package org.example.a.Graphic;
+
+import org.example.a.JPanel.GamePanel;
+import org.example.a.Main;
 
 import java.awt.*;
 
-public class UI {
+public class Graphic {
 
     private GamePanel gamePanel;
 
@@ -10,10 +13,33 @@ public class UI {
 
     private int clickDrawCounter;
 
-    public UI(GamePanel gamePanel) {
+    public Graphic(GamePanel gamePanel) {
         this.clickDrawCounter = 0;
         this.gamePanel = gamePanel;
         this.g2 = (Graphics2D) Main.window.getGraphics();
+    }
+
+    public void drawDragMark(Graphics2D g2){
+        if (gamePanel.getPlayer().isSelected()) {
+            g2.setColor(new Color(0, 0, 0, 190));
+            g2.drawRoundRect(getGamePanel().getPlayer().getWorldX() + 9, getGamePanel().getPlayer().getWorldY() + 25, 30, 30, 30, 30);
+            g2.setColor(new Color(150, 10, 10, 125));
+            g2.fillRoundRect(getGamePanel().getPlayer().getWorldX() + 9, getGamePanel().getPlayer().getWorldY() + 25, 30, 30, 30, 30);
+        }
+        if (getGamePanel().getPlayer2().isSelected()) {
+            g2.setColor(new Color(0, 0, 0, 190));
+            g2.drawRoundRect(getGamePanel().getPlayer2().getWorldX() + 9, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
+            g2.setColor(new Color(150, 90, 10, 125));
+            g2.fillRoundRect(getGamePanel().getPlayer2().getWorldX() + 9, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
+        }
+    }
+    public void drawRectangle(Graphics2D g2) {
+        if (gamePanel.getMouse().isMouseDragged()){
+            Rectangle rectangle = gamePanel.getMouse().getDragRectangle();
+            g2.setColor(new Color(0, 0, 199));
+            g2.setStroke(new BasicStroke(BasicStroke.CAP_SQUARE));
+            g2.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        }
     }
 
     public void drawUtil(Graphics2D g2) {
@@ -34,16 +60,16 @@ public class UI {
         g2.drawString("player -x " + gamePanel.getPlayer().getWorldX(), 250, 120);
         g2.drawString("player -y " + gamePanel.getPlayer().getWorldY(), 250, 150);
     }
+
     public void showClick(Integer x, Integer y) {
-        if (getGamePanel().getMouse().getMouseX() != null && getGamePanel().getMouse().getMouseX() != null) {
-            if (clickDrawCounter != 30) {
-                g2.setColor(new Color(0, 0, 0 ));
+            if (clickDrawCounter != 20) {
+                g2.setColor(new Color(0, 0, 0));
                 g2.drawRoundRect(x, y, 15, 15, 3, 3);
 
                 g2.setColor(new Color(0, 0, 190));
                 g2.fillRoundRect(x, y, 15, 15, 3, 3);
+
                 clickDrawCounter++;
-                System.out.println(clickDrawCounter);
             } else {
                 clickDrawCounter = 0;
                 getGamePanel().getMouse().setMouseX(null);
@@ -51,10 +77,12 @@ public class UI {
             }
 
         }
-    }
+
+
     public GamePanel getGamePanel() {
         return gamePanel;
     }
+
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
