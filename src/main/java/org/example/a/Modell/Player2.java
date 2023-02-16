@@ -49,7 +49,7 @@ public class Player2 {
                 this.solidArea.y = worldY;
             }
         }
-        /*else generateNewGoal();*/
+        else generateNewGoal();
     }
     public void generateNewGoal(){
         this.goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
