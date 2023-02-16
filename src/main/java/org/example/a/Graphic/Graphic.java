@@ -62,7 +62,7 @@ public class Graphic {
     }
 
     public void showClick(Integer x, Integer y) {
-            if (clickDrawCounter != 20) {
+            if (clickDrawCounter != 60000) {
                 g2.setColor(new Color(0, 0, 0));
                 g2.drawRoundRect(x, y, 15, 15, 3, 3);
 

@@ -22,62 +22,73 @@ public class Mouse implements MouseListener, MouseMotionListener {
     }
 
     public void checkDrag() {
-        if (dragRectangle != null) {
-            if (dragRectangle.intersects(gamePanel.getPlayer().getSolidArea())) {
-                gamePanel.getPlayer().setSelected(true);
+        if (this.dragRectangle != null) {
+            if (this.dragRectangle.intersects(this.gamePanel.getPlayer().getSolidArea())) {
+                this.gamePanel.getPlayer().setSelected(true);
             }
-            if (dragRectangle.intersects(gamePanel.getPlayer2().getSolidArea())) {
-                gamePanel.getPlayer2().setSelected(true);
+            if (this.dragRectangle.intersects(this.gamePanel.getPlayer2().getSolidArea())) {
+                this.gamePanel.getPlayer2().setSelected(true);
             }
-            if (!gamePanel.getPlayer().getSolidArea().intersects(getDragRectangle())) {
-                gamePanel.getPlayer().setSelected(false);
+            if (!this.gamePanel.getPlayer().getSolidArea().intersects(getDragRectangle())) {
+                this.gamePanel.getPlayer().setSelected(false);
             }
-            if (!gamePanel.getPlayer2().getSolidArea().intersects(getDragRectangle())) {
-                gamePanel.getPlayer2().setSelected(false);
+            if (!this.gamePanel.getPlayer2().getSolidArea().intersects(getDragRectangle())) {
+                this.gamePanel.getPlayer2().setSelected(false);
             }
         }
     }
 
     public void selectAndMove(MouseEvent me) {
-        cursor = new Rectangle(me.getX(), me.getY(), 10, 10);
-        if (cursor.intersects(gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
-            gamePanel.playSoundEffect(3);
-            gamePanel.getPlayer().setSelected(true);
+        this.cursor = new Rectangle(me.getX(), me.getY(), 10, 10);
+        if (cursor.intersects(this.gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            this.gamePanel.playSoundEffect(3);
+            this.gamePanel.getPlayer().setSelected(true);
         }
-        if (!cursor.intersects(gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+        else if (!cursor.intersects(this.gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
             gamePanel.getPlayer().setSelected(false);
         }
-        // move Entity to location also into Array
+        else if (cursor.intersects(this.gamePanel.getPlayer2().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            this.gamePanel.playSoundEffect(3);
+            this.gamePanel.getPlayer2().setSelected(true);
+        }
+        else if (!cursor.intersects(this.gamePanel.getPlayer2().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            this.gamePanel.getPlayer2().setSelected(false);
+        }
+        this.cursor = null;
+
+        // move Entity to location also into Array inside JPanel
         if (me.getButton() == MouseEvent.BUTTON3) {
-            if (gamePanel.getPlayer().isSelected()) {
-                gamePanel.getPlayer().setGoalX(me.getX() - 22);
-                gamePanel.getPlayer().setGoalY(me.getY() - 48);
-                if (gamePanel.getPlayer2().isSelected()) {
-                    gamePanel.getPlayer2().setGoalX(me.getX() - 22);
-                    gamePanel.getPlayer2().setGoalY(me.getY() - 68);
-                    gamePanel.playSoundEffect(1);
-                }
-                graphic.showClick(me.getX(),me.getY());
+            if (this.gamePanel.getPlayer().isSelected()) {
+                this.gamePanel.getPlayer().setGoalX(me.getX() - 22);
+                this.gamePanel.getPlayer().setGoalY(me.getY() - 48);
+            }
+            if (this.gamePanel.getPlayer2().isSelected()) {
+                this.gamePanel.getPlayer2().setGoalX(me.getX() - 22);
+                this.gamePanel.getPlayer2().setGoalY(me.getY() - 68);
+
+            }
+            if (this.gamePanel.getPlayer().isSelected() || this.gamePanel.getPlayer2().isSelected()){
+                this.graphic.showClick(me.getX(),me.getY());
+                this.gamePanel.playSoundEffect(1);
             }
         }
-        cursor = null;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (dragRectangle == null) {
-            dragX = e.getX();
-            dragY = e.getY();
-            dragRectangle = new Rectangle(e.getX(), e.getY(), 0, 0);
-        }
         setMouseDragged(true);
+        if (this.dragRectangle == null) {
+            this.dragX = e.getX();
+            this.dragY = e.getY();
+            this.dragRectangle = new Rectangle(e.getX(), e.getY(), 0, 0);
+        }
         setDragSize(e);
         checkDrag();
     }
 
     public void setDragSize(MouseEvent e) {
-        dragRectangle.width = e.getX() - dragRectangle.x;
-        dragRectangle.height = e.getY() - dragRectangle.y;
+        this.dragRectangle.width = e.getX() - this.dragRectangle.x;
+        this.dragRectangle.height = e.getY() - this.dragRectangle.y;
     }
 
     @Override
@@ -85,8 +96,8 @@ public class Mouse implements MouseListener, MouseMotionListener {
     }
 
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON3 && gamePanel.getPlayer().isSelected()) {
-            gamePanel.getGraphic().showClick(e.getX(),e.getY());
+        if (e.getButton() == MouseEvent.BUTTON3 && this.gamePanel.getPlayer().isSelected()) {
+            this.gamePanel.getGraphic().showClick(e.getX(),e.getY());
         }
         selectAndMove(e);
     }
@@ -94,7 +105,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mouseReleased(MouseEvent e) {
         if (isMouseDragged()) {
             setMouseDragged(false);
-            dragRectangle = null;
+            this.dragRectangle = null;
         }
     }
 

@@ -3,6 +3,7 @@ package org.example.a.JPanel;
 import org.example.a.*;
 import org.example.a.Graphic.Graphic;
 import org.example.a.Graphic.ImageLoader;
+import org.example.a.Map.Map;
 import org.example.a.Modell.Player;
 import org.example.a.Modell.Player2;
 import org.example.a.Mouse.Mouse;
@@ -22,6 +23,8 @@ public class GamePanel extends JPanel implements Runnable {
     private Mouse mouse;
     private Graphic graphic;
     private Sound sound;
+
+    private Map map;
 
     {
         scale = 3;
@@ -44,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.player2 = new Player2(this);
         this.mouse = new Mouse(this);
         this.sound = new Sound();
+        this.map = new Map(this);
     }
 
     public void playSoundEffect(int i) {
@@ -89,13 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
         player2.movePLayer();
     }
 
-    public Sound getSound() {
-        return sound;
-    }
 
-    public void setSound(Sound sound) {
-        this.sound = sound;
-    }
 
     public void paintComponent(Graphics g) {
 
@@ -103,28 +101,15 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(41, 24, 42));
-        BufferedImage image = ImageLoader.setup("/Grass1", tileSize, tileSize);
 
         //draw background
-        int x = 0;
-        int y = 0;
-        for (int i = 0; i < maxScreenRow + 1; i++) {
-            for (int k = 0; k < maxScreenCol; k++) {
-                g2.drawImage(image, x, y, null);
-                x += tileSize;
-            }
-            x = 0;
-            y += tileSize;
-        }
-
+        map.draw(g2);
         graphic.drawUtil(g2);
-
         graphic.drawDragMark(g2);
         graphic.drawRectangle(g2);
 
         //draw players
         g2.drawImage(player2.getImage(), player2.getWorldX(), player2.getWorldY(), null);
-
         g2.drawImage(player.getImage(), player.getWorldX(), player.getWorldY(), null);
 
         g2.dispose();
@@ -136,6 +121,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameThread.start();
     }
 
+    public Sound getSound() {
+        return sound;
+    }
+
+    public void setSound(Sound sound) {
+        this.sound = sound;
+    }
     public int getOriginalTileSize() {
         return originalTileSize;
     }
