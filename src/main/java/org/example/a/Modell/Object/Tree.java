@@ -1,4 +1,4 @@
-package org.example.a.Modell;
+package org.example.a.Modell.Object;
 
 import org.example.a.Graphic.ImageLoader;
 
@@ -8,7 +8,7 @@ public class Tree extends Object{
 
 
     public Tree(int worldX, int worldY) {
-        super.setImage(ImageLoader.setup("/tiles/tree",100,100));
+        super.setImage(ImageLoader.setup("/Images/Tiles/tree",100,100));
         super.setName("Tree");
         super.setCollision(true);
         super.setWorldX(worldX);

@@ -1,4 +1,4 @@
-package org.example.a.Modell;
+package org.example.a.Modell.Entity;
 
 import org.example.a.Graphic.ImageLoader;
 import org.example.a.JPanel.GamePanel;
@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class NPC {
+public class Unit_2 {
     private GamePanel gamePanel;
     private boolean isSelected = false;
     private int goalX, goalY, speed, worldX, worldY;
@@ -23,7 +23,7 @@ public class NPC {
         this.solidArea = new Rectangle(worldX, worldY, 48, 48);
     }
 
-    public NPC(GamePanel gamePanel) {
+    public Unit_2(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.image = ImageLoader.setup("/New Woman", gamePanel.getTileSize(), gamePanel.getTileSize());
     }

@@ -35,7 +35,7 @@ public class Map {
     public void setup(int index, String imagePath, boolean collision) {
         try {
             tiles[index] = new Tile();
-            tiles[index].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/" + imagePath + ".png")));
+            tiles[index].setImage(ImageIO.read(getClass().getResourceAsStream("/Images/Tiles/" + imagePath + ".png")));
             tiles[index].setImage(ImageLoader.scaleImage(tiles[index].getImage(), tiles[index].getImageWidth(), tiles[index].getImageHeight()));
             tiles[index].setCollision(collision);
         } catch (IOException e) {

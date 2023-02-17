@@ -2,9 +2,13 @@ package org.example.a.JPanel;
 
 import org.example.a.*;
 import org.example.a.Graphic.Graphic;
+import org.example.a.Graphic.ImageLoader;
 import org.example.a.Map.Map;
 import org.example.a.Modell.*;
-import org.example.a.Modell.Object;
+import org.example.a.Modell.Building.Building;
+import org.example.a.Modell.Entity.Unit_2;
+import org.example.a.Modell.Entity.Unit;
+import org.example.a.Modell.Object.Object;
 import org.example.a.Mouse.Mouse;
 import org.example.a.Sound.Sound;
 
@@ -17,14 +21,17 @@ public class GamePanel extends JPanel implements Runnable {
     private int originalTileSize, scale, tileSize;
     private int maxScreenCol, maxScreenRow, screenWidth, screenHeight;
     private Thread gameThread;
-    private Player player;
-    private NPC player2;
+    private Unit unit;
+    private Unit_2 unit_2;
     private Mouse mouse;
     private Graphic graphic;
     private Sound sound;
     private ArrayList<Object> objects;
-    private Map map;
+    private ArrayList<Unit> unitList;
 
+    public ArrayList <Building> buildings = new ArrayList<>();
+    private Map map;
+    private Player player;
     private ModelLoader modelLoader;
 
     {
@@ -36,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.originalTileSize = 16;
         this.tileSize = this.originalTileSize * this.scale;
 
+        this.player = new Player();
 
         this.screenWidth = Main.window.getWidth();
         this.screenHeight = Main.window.getHeight();
@@ -46,17 +54,15 @@ public class GamePanel extends JPanel implements Runnable {
         this.modelLoader = new ModelLoader(this);
         this.graphic = new Graphic(this);
         this.sound = new Sound(this);
-        this.player = new Player(this);
-        this.player2 = new NPC(this);
+        this.unit = new Unit(this);
+        this.unit_2 = new Unit_2(this);
         this.mouse = new Mouse(this);
         this.map = new Map(this);
 
         this.objects = new ArrayList<>();
-
+        this.unitList = new ArrayList<>();
         this.modelLoader.setObjects();
     }
-
-
 
     public GamePanel() {
         this.setPreferredSize(new Dimension((this.maxScreenCol * this.tileSize), (int) ((this.maxScreenRow + 0.5) * this.tileSize)));
@@ -88,8 +94,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.movePLayer();
-        player2.movePLayer();
+        unit.movePLayer();
+        unit_2.movePLayer();
     }
 
     public void paintComponent(Graphics g) {
@@ -106,13 +112,19 @@ public class GamePanel extends JPanel implements Runnable {
         graphic.drawRectangle(g2);
 
         //draw players
-        g2.drawImage(player2.getImage(), player2.getWorldX(), player2.getWorldY(), null);
-        g2.drawImage(player.getImage(), player.getWorldX(), player.getWorldY(), null);
+        g2.drawImage(unit_2.getImage(), unit_2.getWorldX(), unit_2.getWorldY(), null);
+        g2.drawImage(unit.getImage(), unit.getWorldX(), unit.getWorldY(), null);
 
-        for (Object ob:objects) {
+        for (Object ob : objects) {
             ob.draw(g2);
         }
+        if (mouse.isBuilding()) {
+            graphic.drawBuild(graphic.getG2(), ImageLoader.scaleImage(mouse.getBuilding().getImage(), 255, 255), mouse.getMouseX(), mouse.getMouseY());
+        }
 
+        for (Building b:buildings) {
+            g2.drawImage(b.getImage(),b.getWorldX(),b.getWorldY(),null);
+        }
         g2.dispose();
 
     }
@@ -122,6 +134,22 @@ public class GamePanel extends JPanel implements Runnable {
         this.gameThread.start();
     }
 
+
+    public ArrayList<Unit> getUnitList() {
+        return unitList;
+    }
+
+    public void setUnitList(ArrayList<Unit> unitList) {
+        this.unitList = unitList;
+    }
+
+    public ModelLoader getModelLoader() {
+        return modelLoader;
+    }
+
+    public void setModelLoader(ModelLoader modelLoader) {
+        this.modelLoader = modelLoader;
+    }
 
     public ArrayList<Object> getObjects() {
         return objects;
@@ -145,6 +173,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setSound(Sound sound) {
         this.sound = sound;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public int getOriginalTileSize() {
@@ -219,20 +255,20 @@ public class GamePanel extends JPanel implements Runnable {
         this.graphic = graphic;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
-    public NPC getPlayer2() {
-        return player2;
+    public Unit_2 getUnit_2() {
+        return unit_2;
     }
 
-    public void setPlayer2(NPC player2) {
-        this.player2 = player2;
+    public void setUnit_2(Unit_2 unit_2) {
+        this.unit_2 = unit_2;
     }
 
     public Mouse getMouse() {

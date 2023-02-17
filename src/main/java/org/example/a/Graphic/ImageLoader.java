@@ -1,12 +1,19 @@
 package org.example.a.Graphic;
 
+import org.example.a.Modell.Building.Building;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ImageLoader {
+
+    public ImageLoader() {
+
+    }
 
     public static BufferedImage scaleImage(BufferedImage original, int width, int height) {
         BufferedImage scaledImage = new BufferedImage(width, height, original.getType());
@@ -27,4 +34,5 @@ public class ImageLoader {
         }
         return image;
     }
+
 }
