@@ -9,16 +9,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NPC {
     private GamePanel gamePanel;
-
     private boolean isSelected = false;
-
     private int goalX, goalY, speed, worldX, worldY;
     private BufferedImage image;
     private Rectangle solidArea;
 
     {
-        this.worldX = 10;
-        this.worldY = 10;
+        this.worldX = 44;
+        this.worldY = 500;
         this.goalX = worldX + 50;
         this.goalY = worldY + 50;
         this.speed = 1;

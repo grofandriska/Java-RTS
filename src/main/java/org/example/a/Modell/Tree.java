@@ -8,7 +8,7 @@ public class Tree extends Object{
 
 
     public Tree(int worldX, int worldY) {
-        super.setImage(ImageLoader.setup("/tiles/tree",64,88));
+        super.setImage(ImageLoader.setup("/tiles/tree",100,100));
         super.setName("Tree");
         super.setCollision(true);
         super.setWorldX(worldX);

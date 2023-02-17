@@ -4,17 +4,17 @@ import java.awt.*;
 
 public class FontCollection {
 
-    private Font gabriola_20;
+    private Font gabriola_25_BOLD;
 
     public FontCollection() {
-        gabriola_20  = new Font("Gabriola", Font.BOLD, 24);
+        gabriola_25_BOLD = new Font("Gabriola", Font.BOLD, 25);
     }
 
-    public Font getGabriola_20() {
-        return gabriola_20;
+    public Font getGabriola_25_BOLD() {
+        return gabriola_25_BOLD;
     }
 
-    public void setGabriola_20(Font gabriola_20) {
-        this.gabriola_20 = gabriola_20;
+    public void setGabriola_25_BOLD(Font gabriola_25_BOLD) {
+        this.gabriola_25_BOLD = gabriola_25_BOLD;
     }
 }

@@ -6,7 +6,7 @@ import org.example.a.JPanel.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class NPC_2 {
+public class Player {
 
     private boolean isSelected;
     private GamePanel gamePanel;
@@ -34,7 +34,7 @@ public class NPC_2 {
         this.hitPoint = maxHitPoint;
     }
 
-    public NPC_2(GamePanel gamePanel) {
+    public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 

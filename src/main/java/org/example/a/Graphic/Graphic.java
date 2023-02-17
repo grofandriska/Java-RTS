@@ -95,7 +95,7 @@ public class Graphic {
             /* g2.fillRoundRect(100, gamePanel.getScreenHeight() - 128, 8 * 48, 115, 0, 0);*/
             g2.drawImage(gamePanel.getPlayer().getImage(), 110, gamePanel.getScreenHeight() - 122, gamePanel.getTileSize() * 2, gamePanel.getTileSize() * 2, null);
 
-            g2.setFont(fontCollection.getGabriola_20());
+            g2.setFont(fontCollection.getGabriola_25_BOLD());
             g2.setColor(Color.black);
             g2.drawString("Name: " + gamePanel.getPlayer().getName(), 210, gamePanel.getScreenHeight() - 120);
             g2.drawString("MaxHp: " + gamePanel.getPlayer().getMaxHitPoint(), 210, gamePanel.getScreenHeight() - 100);

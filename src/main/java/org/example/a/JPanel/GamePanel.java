@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
     private int originalTileSize, scale, tileSize;
     private int maxScreenCol, maxScreenRow, screenWidth, screenHeight;
     private Thread gameThread;
-    private NPC_2 player;
+    private Player player;
     private NPC player2;
     private Mouse mouse;
     private Graphic graphic;
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.modelLoader = new ModelLoader(this);
         this.graphic = new Graphic(this);
         this.sound = new Sound(this);
-        this.player = new NPC_2(this);
+        this.player = new Player(this);
         this.player2 = new NPC(this);
         this.mouse = new Mouse(this);
         this.map = new Map(this);
@@ -219,11 +219,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.graphic = graphic;
     }
 
-    public NPC_2 getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(NPC_2 player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
