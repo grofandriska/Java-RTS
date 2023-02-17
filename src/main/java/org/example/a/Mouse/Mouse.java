@@ -117,8 +117,8 @@ public class Mouse implements MouseListener, MouseMotionListener {
             leftClicked = true;
         }
         if (e.getButton() == MouseEvent.BUTTON3 && isBuilding && gamePanel.getPlayer().getWood() > building.getWoodValue()) {
-            this.building.setWorldX(e.getX());
-            this.building.setWorldY(e.getY());
+            this.building.setWorldX(e.getX() - building.getImage().getWidth() / 2);
+            this.building.setWorldY(e.getY() - building.getImage().getHeight() / 2);
             this.gamePanel.buildings.add(this.building);
             gamePanel.getPlayer().setWood(gamePanel.getPlayer().getWood() - building.getWoodValue());
             this.isBuilding = false;

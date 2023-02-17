@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
-        this.modelLoader.setObjects();
+        this.modelLoader.setTrees(40);
     }
 
     public GamePanel() {
@@ -107,7 +107,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         //draw background
         map.draw(g2);
-        graphic.drawUtil(g2);
         graphic.drawDragMark(g2);
         graphic.drawRectangle(g2);
 
@@ -115,16 +114,20 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawImage(unit_2.getImage(), unit_2.getWorldX(), unit_2.getWorldY(), null);
         g2.drawImage(unit.getImage(), unit.getWorldX(), unit.getWorldY(), null);
 
-        for (Object ob : objects) {
-            ob.draw(g2);
-        }
+
         if (mouse.isBuilding()) {
-            graphic.drawBuild(graphic.getG2(), ImageLoader.scaleImage(mouse.getBuilding().getImage(), 255, 255), mouse.getMouseX(), mouse.getMouseY());
+            graphic.drawBuild(Graphic.getG2(), ImageLoader.scaleImage(mouse.getBuilding().getImage(), 255, 255), mouse.getMouseX(), mouse.getMouseY());
         }
 
         for (Building b:buildings) {
             g2.drawImage(b.getImage(),b.getWorldX(),b.getWorldY(),null);
         }
+
+        for (Object ob : objects) {
+            ob.draw(g2);
+        }
+
+        graphic.drawUtil(g2);
         g2.dispose();
 
     }

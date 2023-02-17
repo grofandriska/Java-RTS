@@ -3,10 +3,13 @@ package org.example.a.Modell;
 import org.example.a.Graphic.ImageLoader;
 import org.example.a.JPanel.GamePanel;
 import org.example.a.Modell.Building.Building;
+import org.example.a.Modell.Object.Object;
 import org.example.a.Modell.Object.Tree;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ModelLoader {
 
@@ -20,13 +23,20 @@ public class ModelLoader {
         setBuildings();
     }
 
-    public void setObjects() {
-        this.gamePanel.getObjects().add(new Tree(699, 699));
-        this.gamePanel.getObjects().add(new Tree(659, 639));
-        this.gamePanel.getObjects().add(new Tree(679, 519));
-        this.gamePanel.getObjects().add(new Tree(399, 1699));
-        this.gamePanel.getObjects().add(new Tree(1699, 299));
-        this.gamePanel.getObjects().add(new Tree(299, 299));
+    public void setTrees(int size) {
+
+        int counter = 0;
+
+        while (counter != size) {
+
+            int goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
+            int goalY = ThreadLocalRandom.current().nextInt(3 * 48, gamePanel.getScreenHeight() - 3 * 48);
+
+            this.gamePanel.getObjects().add(new Tree(goalX, goalY));
+            counter++;
+        }
+        gamePanel.getObjects().sort(Comparator.comparing(Object::getWorldY));
+
     }
 
     public void setUnits() {

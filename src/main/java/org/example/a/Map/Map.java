@@ -56,10 +56,10 @@ public class Map {
             int tileNum = mapTileNum[worldCol][worldRow];
 
             g.drawImage(tiles[tileNum].getImage(), screenX, screenY,tiles[tileNum].getImageWidth(), tiles[tileNum].getImageHeight(), null);
-            g.setColor(new Color(0, 0, 0));
+          /*  g.setColor(new Color(0, 0, 0));
             g.drawString(String.valueOf(counter), screenX + 20, screenY + 20);
             g.setColor(new Color(255, 0, 0));
-            g.drawString(String.valueOf(counter), screenX + 19, screenY + 20);
+            g.drawString(String.valueOf(counter), screenX + 19, screenY + 20);*/
 
             counter++;
             worldCol++;
