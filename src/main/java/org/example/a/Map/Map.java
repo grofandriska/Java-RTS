@@ -52,13 +52,6 @@ public class Map {
 
         int counter = 0;
 
-        /*if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX
-                    && worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX
-                    && worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY
-                    && worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
-
-
-            }*/
         while (worldCol < gamePanel.getMaxScreenCol() && worldRow < gamePanel.getMaxScreenRow()+1) {
             int tileNum = mapTileNum[worldCol][worldRow];
 
@@ -72,7 +65,7 @@ public class Map {
             worldCol++;
             screenX += 48;
 
-            if (worldCol == mapSize) {
+            if (worldCol == gamePanel.getMaxScreenCol()) {
                 worldCol = 0;
                 screenX = 0;
                 screenY += 48;

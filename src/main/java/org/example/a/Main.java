@@ -3,9 +3,12 @@ package org.example.a;
 import org.example.a.JPanel.GamePanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
     public static JFrame window = new JFrame();
+
+
 
     public static void main(String[] args) {
 

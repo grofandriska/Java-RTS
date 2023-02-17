@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Player2 {
+public class NPC {
     private GamePanel gamePanel;
 
     private boolean isSelected = false;
@@ -19,26 +19,26 @@ public class Player2 {
     {
         this.worldX = 10;
         this.worldY = 10;
-        this.goalX = worldX;
-        this.goalY = worldY;
+        this.goalX = worldX + 50;
+        this.goalY = worldY + 50;
         this.speed = 1;
         this.solidArea = new Rectangle(worldX, worldY, 48, 48);
     }
 
-    public Player2(GamePanel gamePanel) {
+    public NPC(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.image = ImageLoader.setup("/New Woman", gamePanel.getTileSize(), gamePanel.getTileSize());
     }
 
     public void movePLayer() {
-        if ((this.worldX != this.goalX || this.worldY != this.goalY)) {
+        if ((this.worldX != this.goalX || this.worldY != this.goalY && this.goalY < gamePanel.getScreenHeight() - 3 * 48 && gamePanel.getScreenHeight() > 3 * 48)) {
             if (this.goalX < this.worldX) {
                 this.worldX -= this.speed;
                 this.solidArea.x = worldX;
             }
-             if (goalX > worldX) {
+            if (goalX > worldX) {
                 this.worldX += this.speed;
-                 this.solidArea.x = worldX;
+                this.solidArea.x = worldX;
             }
             if (goalY < worldY) {
                 this.worldY -= this.speed;
@@ -48,10 +48,10 @@ public class Player2 {
                 this.worldY += this.speed;
                 this.solidArea.y = worldY;
             }
-        }
-        else generateNewGoal();
+        } else generateNewGoal();
     }
-    public void generateNewGoal(){
+
+    public void generateNewGoal() {
         this.goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
         this.goalY = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenHeight());
     }

@@ -6,8 +6,10 @@ public class Tile {
 
     private BufferedImage image;
     private boolean collision = false;
-
     private int imageWidth = 48,ImageHeight = 48;
+
+
+
 
 
     public BufferedImage getImage() {

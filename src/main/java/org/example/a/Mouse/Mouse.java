@@ -15,8 +15,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     private Rectangle dragRectangle;
     private Rectangle cursor;
     private boolean mouseDragged;
-
-    boolean leftClicked = true;
+    boolean leftClicked;
 
     public Mouse(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -42,21 +41,24 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     public void selectAndMove(MouseEvent me) {
         this.cursor = new Rectangle(me.getX(), me.getY(), 10, 10);
+
         if (cursor.intersects(this.gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
-            this.gamePanel.playSoundEffect(3);
+            this.gamePanel.getSound().playSoundEffect(3);
             this.gamePanel.getPlayer().setSelected(true);
-        }  if (!cursor.intersects(this.gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+        }
+        if (!cursor.intersects(this.gamePanel.getPlayer().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
             gamePanel.getPlayer().setSelected(false);
-        }  if (cursor.intersects(this.gamePanel.getPlayer2().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
-            this.gamePanel.playSoundEffect(3);
+        }
+        if (cursor.intersects(this.gamePanel.getPlayer2().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+            this.gamePanel.getSound().playSoundEffect(3);
             this.gamePanel.getPlayer2().setSelected(true);
-        }  if (!cursor.intersects(this.gamePanel.getPlayer2().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
+        }
+        if (!cursor.intersects(this.gamePanel.getPlayer2().getSolidArea()) && me.getButton() == MouseEvent.BUTTON1) {
             this.gamePanel.getPlayer2().setSelected(false);
         }
         this.cursor = null;
 
-        // move Entity to location also into Array inside JPanel
-        if (me.getButton() == MouseEvent.BUTTON3) {
+        if (me.getButton() == MouseEvent.BUTTON3 && me.getY() > 3 * 48 && me.getY() < gamePanel.getScreenHeight() - 3 * 48) {
             if (this.gamePanel.getPlayer().isSelected()) {
                 this.gamePanel.getPlayer().setGoalX(me.getX() - 22);
                 this.gamePanel.getPlayer().setGoalY(me.getY() - 48);
@@ -68,7 +70,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
             }
             if (this.gamePanel.getPlayer().isSelected() || this.gamePanel.getPlayer2().isSelected()) {
                 this.graphic.showClick(me.getX(), me.getY());
-                this.gamePanel.playSoundEffect(1);
+                this.gamePanel.getSound().playSoundEffect(1);
             }
         }
     }

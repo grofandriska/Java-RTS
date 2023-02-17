@@ -6,13 +6,16 @@ import org.example.a.JPanel.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Player {
+public class NPC_2 {
 
-    private boolean isSelected ;
+    private boolean isSelected;
     private GamePanel gamePanel;
-    private int worldX, worldY, speed,goalX,goalY;
+    private int worldX, worldY, speed, goalX, goalY, hitPoint, attack, defense, range, maxHitPoint;
     private BufferedImage image;
     private Rectangle solidArea;
+
+    private String name;
+
 
     {
         this.isSelected = false;
@@ -20,11 +23,18 @@ public class Player {
         this.worldY = 160;
         this.goalX = this.worldX;
         this.goalY = this.worldY;
-        this.image = ImageLoader.setup("/NHD1", 48,48);
+        this.image = ImageLoader.setup("/NHD1", 48, 48);
         this.solidArea = new Rectangle(this.worldX, this.worldY, 48, 48);
+
+        this.name = "Peasant";
+        this.range = 0;
+        this.attack = 1;
+        this.defense = 0;
+        this.maxHitPoint = 45;
+        this.hitPoint = maxHitPoint;
     }
 
-    public Player(GamePanel gamePanel) {
+    public NPC_2(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
@@ -61,6 +71,7 @@ public class Player {
         return gamePanel;
     }
 
+
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
@@ -83,6 +94,55 @@ public class Player {
 
     public int getSpeed() {
         return speed;
+    }
+
+
+    public int getHitPoint() {
+        return hitPoint;
+    }
+
+    public void setHitPoint(int hitPoint) {
+        this.hitPoint = hitPoint;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public int getMaxHitPoint() {
+        return maxHitPoint;
+    }
+
+    public void setMaxHitPoint(int maxHitPoint) {
+        this.maxHitPoint = maxHitPoint;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setSpeed(int speed) {

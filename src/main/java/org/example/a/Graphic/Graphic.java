@@ -1,22 +1,26 @@
 package org.example.a.Graphic;
 
+import org.example.a.FontCollection;
 import org.example.a.JPanel.GamePanel;
 import org.example.a.Main;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Graphic {
 
+    FontCollection fontCollection;
+    BufferedImage image;
     private GamePanel gamePanel;
-
     private final Graphics2D g2;
-
     private int clickDrawCounter;
 
     public Graphic(GamePanel gamePanel) {
+        fontCollection = new FontCollection();
         this.clickDrawCounter = 0;
         this.gamePanel = gamePanel;
         this.g2 = (Graphics2D) Main.window.getGraphics();
+        image = ImageLoader.setup("/scroll", gamePanel.getScreenWidth() + 350, 300);
     }
 
     public void drawDragMark(Graphics2D g2) {
@@ -28,9 +32,9 @@ public class Graphic {
         }
         if (getGamePanel().getPlayer2().isSelected()) {
             g2.setColor(new Color(0, 0, 0, 190));
-            g2.drawRoundRect(getGamePanel().getPlayer2().getWorldX() +5, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
+            g2.drawRoundRect(getGamePanel().getPlayer2().getWorldX() + 5, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
             g2.setColor(new Color(150, 90, 10, 125));
-            g2.fillRoundRect(getGamePanel().getPlayer2().getWorldX() +5, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
+            g2.fillRoundRect(getGamePanel().getPlayer2().getWorldX() + 5, getGamePanel().getPlayer2().getWorldY() + 25, 30, 30, 30, 30);
         }
     }
 
@@ -44,8 +48,10 @@ public class Graphic {
     }
 
     public void drawUtil(Graphics2D g2) {
+
+        decorateScreen(g2);
         //draw util
-        g2.setColor(new Color(0, 0, 0, 145));
+       /* g2.setColor(new Color(0, 0, 0, 145));
         g2.fillRoundRect(0, gamePanel.getScreenHeight() - 50, gamePanel.getScreenWidth(), 300, 0, 0);
 
         g2.setColor(new Color(255, 255, 255));
@@ -59,7 +65,7 @@ public class Graphic {
         g2.drawString("player goalX -> " + gamePanel.getPlayer().getGoalX()+ "||  ", gamePanel.getTileSize() * 16, gamePanel.getScreenHeight() - 22);
         g2.drawString("player goalY -> " + gamePanel.getPlayer().getGoalY()+ "||  ", gamePanel.getTileSize() * 20, gamePanel.getScreenHeight() - 22);
         g2.drawString("player X -> " + gamePanel.getPlayer().getWorldX()+ "||  ", gamePanel.getTileSize() * 24, gamePanel.getScreenHeight() - 22);
-        g2.drawString("player Y -> " + gamePanel.getPlayer().getWorldY()+ "||  ", gamePanel.getTileSize() * 28, gamePanel.getScreenHeight() - 22);
+        g2.drawString("player Y -> " + gamePanel.getPlayer().getWorldY()+ "||  ", gamePanel.getTileSize() * 28, gamePanel.getScreenHeight() - 22);*/
     }
 
     public void showClick(Integer x, Integer y) {
@@ -79,12 +85,49 @@ public class Graphic {
 
     }
 
+    public void decorateScreen(Graphics2D g2) {
+        g2.drawImage(image, -165, gamePanel.getScreenHeight() - 215, null);
+        g2.drawImage(image, -165, -125, null);
 
-    public GamePanel getGamePanel() {
-        return gamePanel;
+        if (gamePanel.getPlayer().isSelected()) {
+            g2.setColor(new Color(0, 0, 0, 90));
+
+            /* g2.fillRoundRect(100, gamePanel.getScreenHeight() - 128, 8 * 48, 115, 0, 0);*/
+            g2.drawImage(gamePanel.getPlayer().getImage(), 110, gamePanel.getScreenHeight() - 122, gamePanel.getTileSize() * 2, gamePanel.getTileSize() * 2, null);
+
+            g2.setFont(fontCollection.getGabriola_20());
+            g2.setColor(Color.black);
+            g2.drawString("Name: " + gamePanel.getPlayer().getName(), 210, gamePanel.getScreenHeight() - 120);
+            g2.drawString("MaxHp: " + gamePanel.getPlayer().getMaxHitPoint(), 210, gamePanel.getScreenHeight() - 100);
+            g2.drawString("Hp: " + gamePanel.getPlayer().getHitPoint(), 210, gamePanel.getScreenHeight() - 80);
+            g2.drawString("Att: " + gamePanel.getPlayer().getAttack(), 210, gamePanel.getScreenHeight() - 60);
+            g2.drawString("Def: " + gamePanel.getPlayer().getDefense(), 210, gamePanel.getScreenHeight() - 40);
+            g2.drawString("Range: " + gamePanel.getPlayer().getRange(), 210, gamePanel.getScreenHeight() - 20);
+        }
     }
+
+    public void drawInfoBar() {
+
+    }
+
 
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+    }
+
+    public Graphics2D getG2() {
+        return g2;
+    }
+
+    public int getClickDrawCounter() {
+        return clickDrawCounter;
+    }
+
+    public void setClickDrawCounter(int clickDrawCounter) {
+        this.clickDrawCounter = clickDrawCounter;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
     }
 }

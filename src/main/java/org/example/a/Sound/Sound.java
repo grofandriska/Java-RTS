@@ -1,5 +1,7 @@
 package org.example.a.Sound;
 
+import org.example.a.JPanel.GamePanel;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
@@ -8,9 +10,12 @@ public class Sound {
 
     private Clip clip;
 
+    private GamePanel gamePanel;
+
     private URL[] soundURL = new URL[20];
 
-    public Sound() {
+    public Sound(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
         soundURL[0] = getClass().getResource("/sound/1.wav");
         soundURL[1] = getClass().getResource("/sound/2.wav");
         soundURL[2] = getClass().getResource("/sound/3.wav");
@@ -25,6 +30,23 @@ public class Sound {
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void playSoundEffect(int i) {
+        setFile(i);
+        gamePanel.getSound().play();
+    }
+
+    public void stopMusic() {
+        gamePanel.getSound().stop();
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 
     public void play() {
