@@ -1,4 +1,4 @@
-package org.example.a;
+package org.example.a.Collection;
 
 import java.awt.*;
 
@@ -14,7 +14,7 @@ public class FontCollection {
         return gabriola_25_BOLD;
     }
 
-    public void setGabriola_25_BOLD(Font gabriola_25_BOLD) {
+    private void setGabriola_25_BOLD(Font gabriola_25_BOLD) {
         this.gabriola_25_BOLD = gabriola_25_BOLD;
     }
 }

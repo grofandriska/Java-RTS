@@ -6,9 +6,9 @@ import org.example.a.Graphic.ImageLoader;
 import org.example.a.Map.Map;
 import org.example.a.Modell.*;
 import org.example.a.Modell.Building.Building;
-import org.example.a.Modell.Entity.Unit_2;
 import org.example.a.Modell.Entity.Unit;
 import org.example.a.Modell.Object.Object;
+import org.example.a.Modell.Player.Player;
 import org.example.a.Mouse.Mouse;
 import org.example.a.Sound.Sound;
 
@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.originalTileSize = 16;
         this.tileSize = this.originalTileSize * this.scale;
 
-        this.player = new Player();
+        this.player = new Player(this);
 
         this.screenWidth = Main.window.getWidth();
         this.screenHeight = Main.window.getHeight();
@@ -99,8 +99,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void paintComponent(Graphics g) {
-
-        //setup
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(41, 24, 42));
@@ -110,16 +108,18 @@ public class GamePanel extends JPanel implements Runnable {
         graphic.drawDragMark(g2);
         graphic.drawRectangle(g2);
 
-        //draw players
+
         for (Unit u : unitList) {
             g2.drawImage(u.getImage(), u.getWorldX(), u.getWorldY(), null);
         }
 
-        if (mouse.isBuilding()) {
-            graphic.drawBuild(Graphic.getG2(), imageLoader.scaleImage(mouse.getBuilding().getImage(), 255, 255), mouse.getMouseX(), mouse.getMouseY());
+        System.out.println(getPlayer().isBuilding());
+        if (getPlayer().isBuilding()) {
+            getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() - getPlayer().getNewBuilding().getImage().getWidth()/2,
+                    getPlayer().getNewBuilding().getWorldY() -  getPlayer().getNewBuilding().getImage().getHeight()/2);
         }
 
-        for (Building b:getPlayer().getBuildings()) {
+        for (Building b : getPlayer().getBuildings()) {
             b.draw(g2);
         }
 

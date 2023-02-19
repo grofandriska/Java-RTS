@@ -38,9 +38,6 @@ public class Building {
     public void levelUp() {
     }
 
-    public boolean checkIfHasValue(){
-        return gamePanel.getPlayer().getWood() > this.woodValue;
-    }
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, worldX, worldY, null);

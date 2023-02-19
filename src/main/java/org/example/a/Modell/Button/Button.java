@@ -1,4 +1,4 @@
-package org.example.a.Modell;
+package org.example.a.Modell.Button;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

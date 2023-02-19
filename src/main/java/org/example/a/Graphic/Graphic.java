@@ -1,16 +1,14 @@
 package org.example.a.Graphic;
 
-import org.example.a.FontCollection;
+import org.example.a.Collection.FontCollection;
 import org.example.a.JPanel.GamePanel;
 import org.example.a.Main;
 import org.example.a.Modell.Building.Building;
-import org.example.a.Modell.Button;
+import org.example.a.Modell.Button.Button;
 import org.example.a.Modell.Entity.Unit;
 import org.example.a.Modell.ModelLoader;
-import org.example.a.Mouse.Mouse;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
