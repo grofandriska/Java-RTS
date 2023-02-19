@@ -6,9 +6,10 @@ import java.awt.*;
 
 public class Tree extends Object{
 
+    ImageLoader imageLoader = new ImageLoader();
 
     public Tree(int worldX, int worldY) {
-        super.setImage(ImageLoader.setup("/Images/Tiles/tree",100,100));
+        super.setImage(imageLoader.setup("/Images/Tiles/tree",100,100));
         super.setName("Tree");
         super.setCollision(true);
         super.setWorldX(worldX);

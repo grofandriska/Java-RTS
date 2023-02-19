@@ -1,5 +1,6 @@
 package org.example.a.Modell.Building;
 
+import org.example.a.JPanel.GamePanel;
 import org.example.a.Mouse.Mouse;
 
 import java.awt.*;
@@ -7,7 +8,8 @@ import java.awt.image.BufferedImage;
 
 public class Building {
 
-    private int size, hitPoint, woodValue, stoneValue, goldValue, foodValue,worldX,worldY;
+    public GamePanel gamePanel;
+    private int size, hitPoint, woodValue, stoneValue, goldValue, foodValue, worldX, worldY;
     private String name;
     private BufferedImage image;
     private Rectangle solidArea;
@@ -17,8 +19,8 @@ public class Building {
 
     public Building(int size, int hitPoint, int woodValue,
                     int stoneValue, int goldValue, int foodValue,
-                    String name, BufferedImage image, Rectangle solidArea)
-    {
+                    String name, BufferedImage image, Rectangle solidArea,GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
         this.size = size;
         this.hitPoint = hitPoint;
         this.woodValue = woodValue;
@@ -36,7 +38,13 @@ public class Building {
     public void levelUp() {
     }
 
-    public void draw() {
+    public boolean checkIfHasValue(){
+        return gamePanel.getPlayer().getWood() > this.woodValue;
+    }
+
+    public void draw(Graphics2D g2) {
+        g2.drawImage(image, worldX, worldY, null);
+
     }
 
     public int getWorldX() {

@@ -14,6 +14,8 @@ public class Unit_2 {
     private BufferedImage image;
     private Rectangle solidArea;
 
+    public ImageLoader imageLoader;
+
     {
         this.worldX = 44;
         this.worldY = 500;
@@ -25,7 +27,8 @@ public class Unit_2 {
 
     public Unit_2(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        this.image = ImageLoader.setup("/New Woman", gamePanel.getTileSize(), gamePanel.getTileSize());
+        this.imageLoader = new ImageLoader();
+        this.image = imageLoader.setup("/New Woman", gamePanel.getTileSize(), gamePanel.getTileSize());
     }
 
     public void movePLayer() {
@@ -52,6 +55,12 @@ public class Unit_2 {
     public void generateNewGoal() {
         this.goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
         this.goalY = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenHeight());
+    }
+
+    public void setGoals(int x, int y) {
+        this.goalX = x;
+        this.goalY = y;
+
     }
 
     public GamePanel getGamePanel() {

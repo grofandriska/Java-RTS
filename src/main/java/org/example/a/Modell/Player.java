@@ -27,6 +27,7 @@ public class Player {
     public Player() {
     }
 
+
     public ArrayList<Building> getBuildings() {
         return buildings;
     }

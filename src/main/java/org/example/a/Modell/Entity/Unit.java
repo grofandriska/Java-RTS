@@ -14,6 +14,7 @@ public class Unit {
     private BufferedImage image;
     private Rectangle solidArea;
 
+    ImageLoader imageLoader = new ImageLoader();
     private String name;
 
 
@@ -23,7 +24,7 @@ public class Unit {
         this.worldY = 160;
         this.goalX = this.worldX;
         this.goalY = this.worldY;
-        this.image = ImageLoader.setup("/NHD1", 48, 48);
+        this.image = imageLoader.setup("/NHD1", 48, 48);
         this.solidArea = new Rectangle(this.worldX, this.worldY, 48, 48);
 
         this.name = "Peasant";
@@ -38,7 +39,11 @@ public class Unit {
         this.gamePanel = gamePanel;
     }
 
-    public void movePLayer() {
+    public void setGoals(int x, int y){
+        this.goalX = x;
+        this.goalY = y;
+    }
+    public void moveUnit() {
         if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
             if (getGoalX() < getWorldX()) {
                 setWorldX(getWorldX() - 1);

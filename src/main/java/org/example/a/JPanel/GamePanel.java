@@ -21,18 +21,17 @@ public class GamePanel extends JPanel implements Runnable {
     private int originalTileSize, scale, tileSize;
     private int maxScreenCol, maxScreenRow, screenWidth, screenHeight;
     private Thread gameThread;
-    private Unit unit;
-    private Unit_2 unit_2;
     private Mouse mouse;
     private Graphic graphic;
     private Sound sound;
     private ArrayList<Object> objects;
     private ArrayList<Unit> unitList;
-
-    public ArrayList <Building> buildings = new ArrayList<>();
+    public ArrayList<Building> buildings = new ArrayList<>();
     private Map map;
     private Player player;
     private ModelLoader modelLoader;
+
+    public ImageLoader imageLoader = new ImageLoader();
 
     {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -54,14 +53,14 @@ public class GamePanel extends JPanel implements Runnable {
         this.modelLoader = new ModelLoader(this);
         this.graphic = new Graphic(this);
         this.sound = new Sound(this);
-        this.unit = new Unit(this);
-        this.unit_2 = new Unit_2(this);
+
         this.mouse = new Mouse(this);
         this.map = new Map(this);
 
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
-        this.modelLoader.setTrees(40);
+        this.modelLoader.setTrees(20);
+        this.modelLoader.setUnits(10);
     }
 
     public GamePanel() {
@@ -94,8 +93,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        unit.movePLayer();
-        unit_2.movePLayer();
+        for (Unit u : unitList) {
+            u.moveUnit();
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -111,16 +111,16 @@ public class GamePanel extends JPanel implements Runnable {
         graphic.drawRectangle(g2);
 
         //draw players
-        g2.drawImage(unit_2.getImage(), unit_2.getWorldX(), unit_2.getWorldY(), null);
-        g2.drawImage(unit.getImage(), unit.getWorldX(), unit.getWorldY(), null);
-
-
-        if (mouse.isBuilding()) {
-            graphic.drawBuild(Graphic.getG2(), ImageLoader.scaleImage(mouse.getBuilding().getImage(), 255, 255), mouse.getMouseX(), mouse.getMouseY());
+        for (Unit u : unitList) {
+            g2.drawImage(u.getImage(), u.getWorldX(), u.getWorldY(), null);
         }
 
-        for (Building b:buildings) {
-            g2.drawImage(b.getImage(),b.getWorldX(),b.getWorldY(),null);
+        if (mouse.isBuilding()) {
+            graphic.drawBuild(Graphic.getG2(), imageLoader.scaleImage(mouse.getBuilding().getImage(), 255, 255), mouse.getMouseX(), mouse.getMouseY());
+        }
+
+        for (Building b:getPlayer().getBuildings()) {
+            b.draw(g2);
         }
 
         for (Object ob : objects) {
@@ -128,6 +128,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         graphic.drawUtil(g2);
+        graphic.drawBuildBar(g2);
         g2.dispose();
 
     }
@@ -226,6 +227,14 @@ public class GamePanel extends JPanel implements Runnable {
         this.maxScreenRow = maxScreenRow;
     }
 
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(ArrayList<Building> buildings) {
+        this.buildings = buildings;
+    }
+
     public int getScreenWidth() {
         return screenWidth;
     }
@@ -256,22 +265,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setGraphic(Graphic graphic) {
         this.graphic = graphic;
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public Unit_2 getUnit_2() {
-        return unit_2;
-    }
-
-    public void setUnit_2(Unit_2 unit_2) {
-        this.unit_2 = unit_2;
     }
 
     public Mouse getMouse() {

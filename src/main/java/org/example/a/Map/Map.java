@@ -14,6 +14,8 @@ public class Map {
 
     private GamePanel gamePanel;
 
+    public ImageLoader imageLoader = new ImageLoader();
+
     public Tile[] tiles;
     public Integer[][] mapTileNum;
     private int mapSize;
@@ -36,7 +38,7 @@ public class Map {
         try {
             tiles[index] = new Tile();
             tiles[index].setImage(ImageIO.read(getClass().getResourceAsStream("/Images/Tiles/" + imagePath + ".png")));
-            tiles[index].setImage(ImageLoader.scaleImage(tiles[index].getImage(), tiles[index].getImageWidth(), tiles[index].getImageHeight()));
+            tiles[index].setImage(imageLoader.scaleImage(tiles[index].getImage(), tiles[index].getImageWidth(), tiles[index].getImageHeight()));
             tiles[index].setCollision(collision);
         } catch (IOException e) {
             throw new RuntimeException(e);

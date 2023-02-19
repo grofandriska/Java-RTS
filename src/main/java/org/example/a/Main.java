@@ -1,14 +1,17 @@
 package org.example.a;
 
+import org.example.a.Graphic.Graphic;
+import org.example.a.Graphic.ImageLoader;
 import org.example.a.JPanel.GamePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Main {
     public static JFrame window = new JFrame();
 
-
+    public static Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
 
     public static void main(String[] args) {
 
@@ -20,6 +23,7 @@ public class Main {
         window.add(gamePanel);
         window.pack();
         window.setVisible(true);
+
 
         gamePanel.startGameThread();
     }
