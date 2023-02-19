@@ -7,6 +7,7 @@ import org.example.a.Modell.Entity.Unit;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Player {
 
@@ -84,6 +85,7 @@ public class Player {
 
     public void checkBuild(MouseEvent me) {
         if (checkBuildValue()) {
+            buildings.sort(Comparator.comparing(Building::getWorldY));
             this.newBuilding.setWorldX(me.getX() - getNewBuilding().getImage().getWidth() / 2);
             this.newBuilding.setWorldY(me.getY() - getNewBuilding().getImage().getHeight() / 2);
             this.buildings.add(newBuilding);
