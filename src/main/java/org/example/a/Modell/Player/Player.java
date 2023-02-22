@@ -13,7 +13,7 @@ public class Player {
 
     private GamePanel gamePanel;
 
-    private Integer wood, food, gold, stone,screenX,screenY;
+    private Integer wood, food, gold, stone, screenX, screenY;
 
     private ArrayList<Unit> unitList;
 
@@ -38,17 +38,16 @@ public class Player {
         screenY = gamePanel.getScreenHeight() / 2;
     }
 
-    public void moveUnit(MouseEvent me) {
+    public void moveUnit(MouseEvent me, int adjX, int adjY) {
 
         int col = 0;
         int row = 0;
 
         int space = 50;
-
         if (gamePanel.getMouse().clickedOnScreen(me)) {
             for (Unit u : gamePanel.getUnitList()) {
                 if (u.isSelected()) {
-                    u.setGoals(me.getX() + (col * space), me.getY() + (row * space));
+                    u.setGoals(me.getX() + (col * space) + adjX, me.getY() + (row * space) + adjY);
                     col++;
                     if (col == 3) {
                         col = 0;
@@ -62,7 +61,6 @@ public class Player {
     public void drawNewBuilding(Graphics2D g2, int x, int y) {
         if (isBuilding) {
             g2.drawImage(this.newBuilding.getImage(), x, y, null);
-
         }
     }
 
@@ -102,11 +100,11 @@ public class Player {
         return true;
     }
 
-    public void checkBuild(MouseEvent me) {
+    public void checkBuild(MouseEvent me, int adjX, int adjY) {
         if (checkBuildValue()) {
             buildings.sort(Comparator.comparing(Building::getWorldY));
-            this.newBuilding.setWorldX(me.getX() - getNewBuilding().getImage().getWidth() / 2);
-            this.newBuilding.setWorldY(me.getY() - getNewBuilding().getImage().getHeight() / 2);
+            this.newBuilding.setWorldX((me.getX() + adjX) - getNewBuilding().getImage().getWidth() / 2);
+            this.newBuilding.setWorldY((me.getY() + adjY) - getNewBuilding().getImage().getHeight() / 2);
             this.buildings.add(newBuilding);
             this.isBuilding = false;
             this.newBuilding = null;

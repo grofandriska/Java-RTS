@@ -13,7 +13,6 @@ public class Unit {
     private int worldX, worldY, speed, goalX, goalY, hitPoint, attack, defense, range, maxHitPoint;
     private BufferedImage image;
     private Rectangle solidArea;
-
     ImageLoader imageLoader = new ImageLoader();
     private String name;
 
@@ -33,6 +32,12 @@ public class Unit {
         this.defense = 0;
         this.maxHitPoint = 45;
         this.hitPoint = maxHitPoint;
+    }
+
+    public void draw(Graphics2D g2){
+        int screenX = worldX - gamePanel.getPlayer().getScreenX();
+        int screenY = worldY - gamePanel.getPlayer().getScreenY();
+        g2.drawImage(this.getImage(),screenX,screenY,null);
     }
 
     public Unit(GamePanel gamePanel) {
@@ -62,6 +67,13 @@ public class Unit {
                 getSolidArea().y = getWorldY();
             }
         }
+    }
+
+    public void update(){
+        int screenX = worldX - gamePanel.getPlayer().getScreenX();
+        int screenY = worldY - gamePanel.getPlayer().getScreenY();
+        this.worldX =screenX ;
+        this.worldY = screenY;
     }
 
     public boolean isSelected() {

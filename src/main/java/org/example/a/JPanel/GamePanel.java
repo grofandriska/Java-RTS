@@ -59,13 +59,13 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
-        this.modelLoader.setTrees(20);
+        this.modelLoader.setTrees(600);
         this.modelLoader.setUnits(10);
     }
 
     public GamePanel() {
         this.setPreferredSize(new Dimension((this.maxScreenCol * this.tileSize), (int) ((this.maxScreenRow + 0.5) * this.tileSize)));
-        this.setBackground(Color.ORANGE);
+        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
@@ -110,10 +110,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         for (Unit u : unitList) {
-            g2.drawImage(u.getImage(), u.getWorldX(), u.getWorldY(), null);
+            u.draw(g2);
         }
 
-        System.out.println(getPlayer().isBuilding());
         if (getPlayer().isBuilding()) {
             getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() - getPlayer().getNewBuilding().getImage().getWidth()/2,
                     getPlayer().getNewBuilding().getWorldY() -  getPlayer().getNewBuilding().getImage().getHeight()/2);

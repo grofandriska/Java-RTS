@@ -40,7 +40,9 @@ public class Building {
 
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(image, worldX, worldY, null);
+        int screenX = worldX - gamePanel.getPlayer().getScreenX();
+        int screenY = worldY - gamePanel.getPlayer().getScreenY();
+        g2.drawImage(image, screenX, screenY, null);
 
     }
 

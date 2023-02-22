@@ -34,10 +34,10 @@ public class ModelLoader {
 
         while (counter != size) {
 
-            int goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
-            int goalY = ThreadLocalRandom.current().nextInt(3 * 48, gamePanel.getScreenHeight() - 3 * 48);
+            int goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getMap().getMapSize() * gamePanel.getTileSize());
+            int goalY = ThreadLocalRandom.current().nextInt(0, gamePanel.getMap().getMapSize() * gamePanel.getTileSize());
 
-            this.gamePanel.getObjects().add(new Tree(goalX, goalY));
+            this.gamePanel.getObjects().add(new Tree(goalX, goalY,this.gamePanel));
             counter++;
         }
         gamePanel.getObjects().sort(Comparator.comparing(Object::getWorldY));
