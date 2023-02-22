@@ -64,36 +64,36 @@ public class ModelLoader {
     public void setBuildings() {
 
         Building archery = new Building(10, 500, 1150, 0, 0, 0, "Archery",
-                imageLoader.setup("/Images/Building/archery_range", 305, 222),
+                imageLoader.setup("/Images/Building/archery_range", 305/2, 222/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
         Building barracks = new Building(10, 500, 150, 0, 0, 0, "Barracks",
-                imageLoader.setup("/Images/Building/barracks", 315, 250),
+                imageLoader.setup("/Images/Building/barracks", 315/2, 250/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
 
         Building blacksmith = new Building(10, 500, 150, 0, 0, 0, "Blacksmith",
-                imageLoader.setup("/Images/Building/blacksmith", 305, 259),
+                imageLoader.setup("/Images/Building/blacksmith", 305/2, 259/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
 
         Building castle = new Building(10, 500, 150, 0, 0, 0, "Castle",
-                imageLoader.setup("/Images/Building/castle", 500, 422),
+                imageLoader.setup("/Images/Building/castle", 500/2, 422/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
 
         Building house1 = new Building(10, 500, 150, 0, 0, 0, "House 1",
-                imageLoader.setup("/Images/Building/house1", 178, 141),
+                imageLoader.setup("/Images/Building/house1", 178/2, 141/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
 
         Building house2 = new Building(10, 500, 150, 0, 0, 0, "House 2",
-                imageLoader.setup("/Images/Building/house1b", 175, 140),
+                imageLoader.setup("/Images/Building/house1b", 175/2, 140/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
 
         Building stable = new Building(10, 500, 150, 0, 0, 0, "Stable",
-                imageLoader.setup("/Images/Building/stable", 318, 252),
+                imageLoader.setup("/Images/Building/stable", 318/2, 252/2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
 
 

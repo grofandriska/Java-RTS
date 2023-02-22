@@ -13,7 +13,7 @@ public class Player {
 
     private GamePanel gamePanel;
 
-    private Integer wood, food, gold, stone;
+    private Integer wood, food, gold, stone,screenX,screenY;
 
     private ArrayList<Unit> unitList;
 
@@ -34,6 +34,8 @@ public class Player {
 
     public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        screenX = gamePanel.getScreenWidth() / 2;
+        screenY = gamePanel.getScreenHeight() / 2;
     }
 
     public void moveUnit(MouseEvent me) {
@@ -62,6 +64,23 @@ public class Player {
             g2.drawImage(this.newBuilding.getImage(), x, y, null);
 
         }
+    }
+
+
+    public Integer getScreenX() {
+        return screenX;
+    }
+
+    public void setScreenX(Integer screenX) {
+        this.screenX = screenX;
+    }
+
+    public Integer getScreenY() {
+        return screenY;
+    }
+
+    public void setScreenY(Integer screenY) {
+        this.screenY = screenY;
     }
 
     public boolean checkBuildValue() {

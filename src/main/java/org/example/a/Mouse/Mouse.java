@@ -34,7 +34,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            if (gamePanel.getPlayer().getNewBuilding() != null){
+            if (gamePanel.getPlayer().getNewBuilding() != null) {
                 gamePanel.getPlayer().setBuilding(false);
                 gamePanel.getPlayer().setNewBuilding(null);
             }
@@ -58,9 +58,21 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         this.mouseX = e.getX();
         this.mouseY = e.getY();
-        if (gamePanel.getPlayer().isBuilding()){
+        if (gamePanel.getPlayer().isBuilding()) {
             gamePanel.getPlayer().getNewBuilding().setWorldX(mouseX);
             gamePanel.getPlayer().getNewBuilding().setWorldY(mouseY);
+        }
+        if (mouseY > gamePanel.getScreenHeight() - 100) {
+            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() + 1);
+        }
+        if (mouseY < 100) {
+            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() - 1);
+        }
+        if (mouseX > gamePanel.getScreenWidth() - 100) {
+            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() + 1);
+        }
+        if (mouseX < 100) {
+            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() - 1);
         }
     }
 

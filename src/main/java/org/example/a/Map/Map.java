@@ -16,17 +16,23 @@ public class Map {
 
     public ImageLoader imageLoader = new ImageLoader();
 
+    private final int maxWorldCol;
+    private final int maxWorldRow;
+
     public Tile[] tiles;
     public Integer[][] mapTileNum;
     private int mapSize;
 
     public Map(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        this.mapSize = 40;
+        this.mapSize = 80;
         this.tiles = new Tile[10];
         this.mapTileNum = new Integer[mapSize][mapSize];
         loadTileArray();
         loadMapFromTxt(mapSize);
+
+        maxWorldCol = mapSize;
+        maxWorldRow = mapSize;
 
     }
 
@@ -46,31 +52,24 @@ public class Map {
     }
 
     public void draw(Graphics2D g) {
+
         int worldCol = 0;
         int worldRow = 0;
+        while (worldCol < maxWorldCol && worldRow < maxWorldRow) {
 
-        int screenX = 0;
-        int screenY = 0;
-
-        int counter = 0;
-
-        while (worldCol < gamePanel.getMaxScreenCol() && worldRow < gamePanel.getMaxScreenRow()+1) {
             int tileNum = mapTileNum[worldCol][worldRow];
 
-            g.drawImage(tiles[tileNum].getImage(), screenX, screenY,tiles[tileNum].getImageWidth(), tiles[tileNum].getImageHeight(), null);
-          /*  g.setColor(new Color(0, 0, 0));
-            g.drawString(String.valueOf(counter), screenX + 20, screenY + 20);
-            g.setColor(new Color(255, 0, 0));
-            g.drawString(String.valueOf(counter), screenX + 19, screenY + 20);*/
+            int worldX = worldCol * gamePanel.getTileSize();
+            int worldY = worldRow * gamePanel.getTileSize();
 
-            counter++;
+            int screenX = worldX - gamePanel.getPlayer().getScreenX();
+            int screenY = worldY - gamePanel.getPlayer().getScreenY();
+
+            g.drawImage(tiles[tileNum].getImage(), screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
             worldCol++;
-            screenX += 48;
 
-            if (worldCol == gamePanel.getMaxScreenCol()) {
+            if (worldCol == maxWorldCol) {
                 worldCol = 0;
-                screenX = 0;
-                screenY += 48;
                 worldRow++;
             }
         }
