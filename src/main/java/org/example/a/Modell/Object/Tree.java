@@ -5,7 +5,7 @@ import org.example.a.JPanel.GamePanel;
 
 import java.awt.*;
 
-public class Tree extends Object{
+public class Tree extends Object {
 
     ImageLoader imageLoader = new ImageLoader();
 
@@ -13,14 +13,14 @@ public class Tree extends Object{
 
     GamePanel gamePanel;
 
-    public Tree(int worldX, int worldY,GamePanel gamePanel) {
+    public Tree(int worldX, int worldY, GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        super.setImage(imageLoader.setup("/Images/Tiles/tree",100,100));
+        super.setImage(imageLoader.setup("/Images/Tiles/tree3", 100, 100));
         super.setName("Tree");
         super.setCollision(true);
         super.setWorldX(worldX);
         super.setWorldY(worldY);
-        this.solidArea = new Rectangle(getWorldX()+getImage().getWidth()/4,getWorldY(),getImage().getWidth()/2,getImage().getHeight());
+        this.solidArea = new Rectangle(getWorldX() + getImage().getWidth() / 4, getWorldY(), getImage().getWidth() / 2, getImage().getHeight());
 
     }
 
@@ -48,10 +48,10 @@ public class Tree extends Object{
         this.gamePanel = gamePanel;
     }
 
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) {
         int screenX = getWorldX() - gamePanel.getPlayer().getScreenX();
         int screenY = getWorldY() - gamePanel.getPlayer().getScreenY();
-        g2.drawImage(super.getImage(),screenX,screenY,null);
+        g2.drawImage(super.getImage(), screenX, screenY, null);
 
     }
 }

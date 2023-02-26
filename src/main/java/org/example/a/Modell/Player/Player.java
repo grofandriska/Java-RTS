@@ -3,6 +3,7 @@ package org.example.a.Modell.Player;
 import org.example.a.JPanel.GamePanel;
 import org.example.a.Modell.Building.Building;
 import org.example.a.Modell.Entity.Unit;
+import org.example.a.Modell.Object.Tree;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -105,6 +106,7 @@ public class Player {
             this.newBuilding.setWorldY((me.getY() + adjY) - getNewBuilding().getImage().getHeight() / 2);
             this.newBuilding.setSolidArea(new Rectangle(this.newBuilding.getWorldX(), this.newBuilding.getWorldY(), this.newBuilding.getImage().getWidth(), this.newBuilding.getImage().getHeight()));
             this.buildings.add(newBuilding);
+            gamePanel.getObjects().removeIf(t -> t.getSolidArea().intersects(newBuilding.getSolidArea()));
             this.isBuilding = false;
             this.newBuilding = null;
         }
