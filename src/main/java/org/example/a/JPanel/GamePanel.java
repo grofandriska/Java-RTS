@@ -8,6 +8,7 @@ import org.example.a.Modell.*;
 import org.example.a.Modell.Building.Building;
 import org.example.a.Modell.Entity.Unit;
 import org.example.a.Modell.Object.Object;
+import org.example.a.Modell.Object.Tree;
 import org.example.a.Modell.Player.Player;
 import org.example.a.Mouse.Mouse;
 import org.example.a.Sound.Sound;
@@ -24,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Mouse mouse;
     private Graphic graphic;
     private Sound sound;
-    private ArrayList<Object> objects;
+    private ArrayList<Tree> objects;
     private ArrayList<Unit> unitList;
     public ArrayList<Building> buildings = new ArrayList<>();
     private Map map;
@@ -59,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
-        this.modelLoader.setTrees(600);
+        this.modelLoader.setTrees(360);
         this.modelLoader.setUnits(10);
     }
 
@@ -114,8 +115,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         if (getPlayer().isBuilding()) {
-            getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() - getPlayer().getNewBuilding().getImage().getWidth()/2,
-                    getPlayer().getNewBuilding().getWorldY() -  getPlayer().getNewBuilding().getImage().getHeight()/2);
+
+            getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() ,
+                    getPlayer().getNewBuilding().getWorldY() );
         }
 
         for (Building b : getPlayer().getBuildings()) {
@@ -154,11 +156,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.modelLoader = modelLoader;
     }
 
-    public ArrayList<Object> getObjects() {
+    public ArrayList<Tree> getObjects() {
         return objects;
     }
 
-    public void setObjects(ArrayList<Object> objects) {
+    public void setObjects(ArrayList<Tree> objects) {
         this.objects = objects;
     }
 

@@ -60,7 +60,7 @@ public class Player {
 
     public void drawNewBuilding(Graphics2D g2, int x, int y) {
         if (isBuilding) {
-            g2.drawImage(this.newBuilding.getImage(), x, y, null);
+            g2.drawImage(this.newBuilding.getImage(), x , y , null);
         }
     }
 
@@ -105,6 +105,7 @@ public class Player {
             buildings.sort(Comparator.comparing(Building::getWorldY));
             this.newBuilding.setWorldX((me.getX() + adjX) - getNewBuilding().getImage().getWidth() / 2);
             this.newBuilding.setWorldY((me.getY() + adjY) - getNewBuilding().getImage().getHeight() / 2);
+            this.newBuilding.setSolidArea(new Rectangle(this.newBuilding.getWorldX(),this.newBuilding.getWorldY(),this.newBuilding.getImage().getWidth(),this.newBuilding.getImage().getHeight()));
             this.buildings.add(newBuilding);
             this.isBuilding = false;
             this.newBuilding = null;

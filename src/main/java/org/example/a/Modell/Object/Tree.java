@@ -9,6 +9,8 @@ public class Tree extends Object{
 
     ImageLoader imageLoader = new ImageLoader();
 
+    Rectangle solidArea;
+
     GamePanel gamePanel;
 
     public Tree(int worldX, int worldY,GamePanel gamePanel) {
@@ -18,6 +20,32 @@ public class Tree extends Object{
         super.setCollision(true);
         super.setWorldX(worldX);
         super.setWorldY(worldY);
+        this.solidArea = new Rectangle(getWorldX()+getImage().getWidth()/4,getWorldY(),getImage().getWidth()/2,getImage().getHeight());
+
+    }
+
+    public ImageLoader getImageLoader() {
+        return imageLoader;
+    }
+
+    public void setImageLoader(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
+    }
+
+    public Rectangle getSolidArea() {
+        return solidArea;
+    }
+
+    public void setSolidArea(Rectangle solidArea) {
+        this.solidArea = solidArea;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
     }
 
     public void draw(Graphics2D g2){

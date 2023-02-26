@@ -68,8 +68,8 @@ public class Mouse implements MouseListener, MouseMotionListener {
         this.mouseY = e.getY();
 
         if (gamePanel.getPlayer().isBuilding()) {
-            gamePanel.getPlayer().getNewBuilding().setWorldX(mouseX + screenAdjustValueX);
-            gamePanel.getPlayer().getNewBuilding().setWorldY(mouseY + screenAdjustValueY);
+            gamePanel.getPlayer().getNewBuilding().setWorldX(mouseX-gamePanel.getPlayer().getNewBuilding().getImage().getWidth()/2);
+            gamePanel.getPlayer().getNewBuilding().setWorldY(mouseY-gamePanel.getPlayer().getNewBuilding().getImage().getHeight()/2);
         }
         moveCamera();
 
@@ -78,20 +78,20 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     public void moveCamera() {
         if (mouseY > gamePanel.getScreenHeight() - 100) {
-            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() + 1);
-            screenAdjustValueY += 1;
+            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() + 13);
+            screenAdjustValueY += 13;
         }
         if (mouseY < 100) {
-            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() - 1);
-            screenAdjustValueY -= 1;
+            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() - 13);
+            screenAdjustValueY -= 13;
         }
         if (mouseX > gamePanel.getScreenWidth() - 100) {
-            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() + 1);
-            screenAdjustValueX += 1;
+            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() + 13);
+            screenAdjustValueX += 13;
         }
         if (mouseX < 100) {
-            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() - 1);
-            screenAdjustValueX -= 1;
+            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() - 13);
+            screenAdjustValueX -= 13;
         }
     }
 
@@ -100,12 +100,13 @@ public class Mouse implements MouseListener, MouseMotionListener {
         initDrag(e);
         setDragSize(e);
         checkIfDragIntersectUnit();
+
     }
 
     public void setDragSize(MouseEvent e) {
         if (dragRectangle != null) {
-            this.dragRectangle.width = e.getX() - this.dragRectangle.x;
-            this.dragRectangle.height = e.getY() - this.dragRectangle.y;
+            this.dragRectangle.width = e.getX() + screenAdjustValueX - this.dragRectangle.x;
+            this.dragRectangle.height = e.getY()+ screenAdjustValueY - this.dragRectangle.y;
             this.realDrag.width = e.getX() + screenAdjustValueX - this.dragRectangle.x;
             this.realDrag.height = e.getY() + screenAdjustValueY - this.dragRectangle.y;
         }
@@ -115,9 +116,10 @@ public class Mouse implements MouseListener, MouseMotionListener {
         if (isMouseDragged()) {
             setMouseDragged(false);
             this.dragRectangle = null;
+            this.realDrag = null;
         }
         if (gamePanel.getPlayer().isBuilding() && e.getButton() == MouseEvent.BUTTON3) {
-            gamePanel.getPlayer().checkBuild(e,screenAdjustValueX,screenAdjustValueY);
+            gamePanel.getPlayer().checkBuild(e, screenAdjustValueX, screenAdjustValueY);
         }
 
     }
@@ -136,7 +138,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void initDrag(MouseEvent me) {
         if (this.dragRectangle == null && leftClicked && this.realDrag == null) {
             setMouseDragged(true);
-            this.dragRectangle = new Rectangle(me.getX(), me.getY(), 0, 0);
+            this.dragRectangle = new Rectangle(me.getX() + screenAdjustValueX, me.getY() + screenAdjustValueY, 0, 0);
             this.realDrag = new Rectangle(me.getY() + screenAdjustValueY, me.getX() + screenAdjustValueX, 0, 0);
         }
     }
@@ -173,7 +175,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void checkIfDragIntersectUnit() {
         if (this.dragRectangle != null) {
             for (Unit unit : gamePanel.getUnitList()) {
-                unit.setSelected(unit.getSolidArea().intersects(realDrag));
+                unit.setSelected(unit.getSolidArea().intersects(dragRectangle));
             }
         }
     }

@@ -57,10 +57,10 @@ public class Graphic {
         for (Unit u : gamePanel.getUnitList()) {
             if (u.isSelected()) {
                 g2.setColor(new Color(0, 0, 0, 190));
-                g2.drawRoundRect(u.getWorldX() + 9 -gamePanel.getMouse().getScreenAdjustValueX(), u.getWorldY() + 25-gamePanel.getMouse().getScreenAdjustValueY(), 30, 30, 30, 30);
+                g2.drawRoundRect(u.getWorldX() + 9 - gamePanel.getMouse().getScreenAdjustValueX(), u.getWorldY() + 25 - gamePanel.getMouse().getScreenAdjustValueY(), 30, 30, 30, 30);
 
                 g2.setColor(new Color(150, 10, 10, 125));
-                g2.fillRoundRect(u.getWorldX() - gamePanel.getMouse().getScreenAdjustValueX() + 9, u.getWorldY() -gamePanel.getMouse().getScreenAdjustValueY() + 25, 30, 30, 30, 30);
+                g2.fillRoundRect(u.getWorldX() - gamePanel.getMouse().getScreenAdjustValueX() + 9, u.getWorldY() - gamePanel.getMouse().getScreenAdjustValueY() + 25, 30, 30, 30, 30);
             }
         }
     }
@@ -70,7 +70,7 @@ public class Graphic {
             Rectangle rectangle = gamePanel.getMouse().getDragRectangle();
             g2.setColor(new Color(0, 0, 199));
             g2.setStroke(new BasicStroke(BasicStroke.CAP_SQUARE));
-            g2.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+            g2.drawRect(rectangle.x - gamePanel.getMouse().getScreenAdjustValueX(), rectangle.y - gamePanel.getMouse().getScreenAdjustValueY(), rectangle.width, rectangle.height);
         }
     }
 

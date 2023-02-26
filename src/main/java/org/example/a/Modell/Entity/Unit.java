@@ -2,6 +2,8 @@ package org.example.a.Modell.Entity;
 
 import org.example.a.Graphic.ImageLoader;
 import org.example.a.JPanel.GamePanel;
+import org.example.a.Modell.Building.Building;
+import org.example.a.Modell.Object.Tree;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,46 +36,67 @@ public class Unit {
         this.hitPoint = maxHitPoint;
     }
 
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) {
         int screenX = worldX - gamePanel.getPlayer().getScreenX();
         int screenY = worldY - gamePanel.getPlayer().getScreenY();
-        g2.drawImage(this.getImage(),screenX,screenY,null);
+        g2.drawImage(this.getImage(), screenX, screenY, null);
     }
 
     public Unit(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
-    public void setGoals(int x, int y){
+    public void setGoals(int x, int y) {
         this.goalX = x;
         this.goalY = y;
     }
+
     public void moveUnit() {
-        if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
-            if (getGoalX() < getWorldX()) {
-                setWorldX(getWorldX() - 1);
-                getSolidArea().x = getWorldX();
-            }
-            if (getGoalX() > getWorldX()) {
-                setWorldX(getWorldX() + 1);
-                getSolidArea().x = getWorldX();
-            }
-            if (getGoalY() < getWorldY()) {
-                setWorldY(getWorldY() - 1);
-                getSolidArea().y = getWorldY();
-            }
-            if (getGoalY() > getWorldY()) {
-                setWorldY(getWorldY() + 1);
-                getSolidArea().y = getWorldY();
+        if (checkBorder(this) && checkCollision() && checkTree()) {
+            if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
+                if (getGoalX() < getWorldX()) {
+                    setWorldX(getWorldX() - 1);
+                    getSolidArea().x = getWorldX();
+                }
+                if (getGoalX() > getWorldX()) {
+                    setWorldX(getWorldX() + 1);
+                    getSolidArea().x = getWorldX();
+                }
+                if (getGoalY() < getWorldY()) {
+                    setWorldY(getWorldY() - 1);
+                    getSolidArea().y = getWorldY();
+                }
+                if (getGoalY() > getWorldY()) {
+                    setWorldY(getWorldY() + 1);
+                    getSolidArea().y = getWorldY();
+                }
             }
         }
     }
 
-    public void update(){
-        int screenX = worldX - gamePanel.getPlayer().getScreenX();
-        int screenY = worldY - gamePanel.getPlayer().getScreenY();
-        this.worldX =screenX ;
-        this.worldY = screenY;
+    public boolean checkBorder(Unit unit) {
+        return unit.getGoalX() >= 0 && unit.getGoalX() <= gamePanel.getMap().getMapSize() * gamePanel.getTileSize()
+                && unit.getGoalY() >= 0 && unit.getGoalY() <= gamePanel.getMap().getMapSize() * gamePanel.getTileSize();
+    }
+
+    public boolean checkCollision() {
+        Rectangle rectangle = new Rectangle(goalX,goalY,getSolidArea().width,getSolidArea().height);
+        for (Building b:gamePanel.getPlayer().getBuildings()) {
+            if (rectangle.intersects(b.getSolidArea())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkTree(){
+        Rectangle rectangle = new Rectangle(goalX,goalY,getSolidArea().width,getSolidArea().height);
+        for (Tree r:gamePanel.getObjects()) {
+            if (r.getSolidArea().intersects(rectangle)){
+                return false;
+            }
+
+        }return true;
     }
 
     public boolean isSelected() {
@@ -170,7 +193,7 @@ public class Unit {
         return goalX;
     }
 
-    public void setGoalX(int goalX) {
+    public void setGoalX(Integer goalX) {
         this.goalX = goalX;
     }
 
@@ -178,7 +201,7 @@ public class Unit {
         return goalY;
     }
 
-    public void setGoalY(int goalY) {
+    public void setGoalY(Integer goalY) {
         this.goalY = goalY;
     }
 
