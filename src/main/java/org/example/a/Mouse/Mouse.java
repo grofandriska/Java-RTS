@@ -18,7 +18,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     private GamePanel gamePanel;
     private Integer mouseX, mouseY, dragStartX, dragStartY;
     private Integer screenAdjustValueX = 0, screenAdjustValueY = 0;
-    private Rectangle cursor, dragRectangle, realDrag;
+    private Rectangle cursor, dragRectangle;
     private boolean mouseDragged;
     private boolean leftClicked;
     private Building building;
@@ -85,20 +85,20 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     public void moveCamera() {
         if (mouseY > gamePanel.getScreenHeight() - 100) {
-            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() + 13);
-            screenAdjustValueY += 13;
+            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() + 5);
+            screenAdjustValueY += 5;
         }
         if (mouseY < 100) {
-            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() - 13);
-            screenAdjustValueY -= 13;
+            gamePanel.getPlayer().setScreenY(gamePanel.getPlayer().getScreenY() - 5);
+            screenAdjustValueY -= 5;
         }
         if (mouseX > gamePanel.getScreenWidth() - 100) {
-            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() + 13);
-            screenAdjustValueX += 13;
+            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() + 5);
+            screenAdjustValueX += 5;
         }
         if (mouseX < 100) {
-            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() - 13);
-            screenAdjustValueX -= 13;
+            gamePanel.getPlayer().setScreenX(gamePanel.getPlayer().getScreenX() - 5);
+            screenAdjustValueX -= 5;
         }
     }
 
@@ -114,8 +114,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
         if (dragRectangle != null) {
             this.dragRectangle.width = e.getX() + screenAdjustValueX - this.dragRectangle.x;
             this.dragRectangle.height = e.getY()+ screenAdjustValueY - this.dragRectangle.y;
-            this.realDrag.width = e.getX() + screenAdjustValueX - this.dragRectangle.x;
-            this.realDrag.height = e.getY() + screenAdjustValueY - this.dragRectangle.y;
         }
     }
 
@@ -123,7 +121,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
         if (isMouseDragged()) {
             setMouseDragged(false);
             this.dragRectangle = null;
-            this.realDrag = null;
         }
         if (gamePanel.getPlayer().isBuilding() && e.getButton() == MouseEvent.BUTTON3) {
             gamePanel.getPlayer().checkBuild(e, screenAdjustValueX, screenAdjustValueY);
@@ -143,10 +140,9 @@ public class Mouse implements MouseListener, MouseMotionListener {
     }
 
     public void initDrag(MouseEvent me) {
-        if (this.dragRectangle == null && leftClicked && this.realDrag == null) {
+        if (this.dragRectangle == null && leftClicked ) {
             setMouseDragged(true);
             this.dragRectangle = new Rectangle(me.getX() + screenAdjustValueX, me.getY() + screenAdjustValueY, 0, 0);
-            this.realDrag = new Rectangle(me.getY() + screenAdjustValueY, me.getX() + screenAdjustValueX, 0, 0);
         }
     }
 
@@ -211,13 +207,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
         this.screenAdjustValueY = screenAdjustValueY;
     }
 
-    public Rectangle getRealDrag() {
-        return realDrag;
-    }
-
-    public void setRealDrag(Rectangle realDrag) {
-        this.realDrag = realDrag;
-    }
 
     public Building getBuilding() {
         return building;

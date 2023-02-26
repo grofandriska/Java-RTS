@@ -32,7 +32,6 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
     private ModelLoader modelLoader;
 
-    private KeyHandler keyHandler;
 
     {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -48,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.maxScreenRow = this.screenHeight / this.tileSize;
 
         this.modelLoader = new ModelLoader(this);
-        this.keyHandler = new KeyHandler(this);
+
         this.graphic = new Graphic(this);
         this.sound = new Sound(this);
         this.mouse = new Mouse(this);
@@ -70,7 +69,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
-        this.addKeyListener(keyHandler);
     }
 
     @Override
@@ -108,10 +106,18 @@ public class GamePanel extends JPanel implements Runnable {
         graphic.drawDragMark(g2);
         graphic.drawRectangle(g2);
 
-        for (Unit u : unitList) {u.draw(g2);}
-        for (Object ob : objects) {ob.draw(g2);}
-        if (getPlayer().isBuilding()) {getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() , getPlayer().getNewBuilding().getWorldY() );}
-        for (Building b : getPlayer().getBuildings()) {b.draw(g2);}
+        for (Unit u : unitList) {
+            u.draw(g2);
+        }
+        for (Object ob : objects) {
+            ob.draw(g2);
+        }
+        if (getPlayer().isBuilding()) {
+            getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX(), getPlayer().getNewBuilding().getWorldY());
+        }
+        for (Building b : getPlayer().getBuildings()) {
+            b.draw(g2);
+        }
 
         graphic.drawUtil(g2);
         graphic.drawBuildBar(g2);

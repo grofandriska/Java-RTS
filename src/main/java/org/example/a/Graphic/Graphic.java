@@ -32,7 +32,7 @@ public class Graphic {
         this.fontCollection = new FontCollection();
         this.clickDrawCounter = 0;
         this.gamePanel = gamePanel;
-        this.g2 = (Graphics2D) Main.window.getGraphics();
+        g2 = (Graphics2D) Main.window.getGraphics();
         this.scrollImage = imageLoader.setup("/scroll", gamePanel.getScreenWidth() + 350, 300);
         this.buttons = new ArrayList<>();
         initButtonImg();

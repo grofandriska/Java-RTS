@@ -16,8 +16,6 @@ public class Player {
     private Integer wood, food, gold, stone, screenX, screenY;
 
     private ArrayList<Unit> unitList;
-
-
     private ArrayList<Building> buildings;
 
     private Building newBuilding;
@@ -35,8 +33,8 @@ public class Player {
 
     public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        screenX = gamePanel.getScreenWidth() / 2;
-        screenY = gamePanel.getScreenHeight() / 2;
+        screenX = 0;
+        screenY = 0;
     }
 
     public void moveUnit(MouseEvent me, int adjX, int adjY) {

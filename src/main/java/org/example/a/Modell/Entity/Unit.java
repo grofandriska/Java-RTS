@@ -52,7 +52,7 @@ public class Unit {
     }
 
     public void moveUnit() {
-        if (checkBorder(this) && checkCollision() && checkTree()) {
+
             if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
                 if (getGoalX() < getWorldX()) {
                     setWorldX(getWorldX() - 1);
@@ -71,37 +71,7 @@ public class Unit {
                     getSolidArea().y = getWorldY();
                 }
             }
-        }
-        else {generateNewGoal();}
-    }
 
-    public void generateNewGoal() {
-        this.goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
-        this.goalY = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenHeight());
-    }
-    public boolean checkBorder(Unit unit) {
-        return unit.getGoalX() >= 0 && unit.getGoalX() <= gamePanel.getMap().getMapSize() * gamePanel.getTileSize()
-                && unit.getGoalY() >= 0 && unit.getGoalY() <= gamePanel.getMap().getMapSize() * gamePanel.getTileSize();
-    }
-
-    public boolean checkCollision() {
-        Rectangle rectangle = new Rectangle(goalX,goalY,getSolidArea().width,getSolidArea().height);
-        for (Building b:gamePanel.getPlayer().getBuildings()) {
-            if (rectangle.intersects(b.getSolidArea())){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean checkTree(){
-        Rectangle rectangle = new Rectangle(goalX,goalY,getSolidArea().width,getSolidArea().height);
-        for (Tree r:gamePanel.getObjects()) {
-            if (r.getSolidArea().intersects(rectangle)){
-                return false;
-            }
-
-        }return true;
     }
 
     public boolean isSelected() {
