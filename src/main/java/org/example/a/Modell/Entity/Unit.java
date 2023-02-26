@@ -19,7 +19,6 @@ public class Unit {
     ImageLoader imageLoader = new ImageLoader();
     private String name;
 
-
     {
         this.isSelected = false;
         this.worldX = 160;

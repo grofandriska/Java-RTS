@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Player player;
     private ModelLoader modelLoader;
 
-    public ImageLoader imageLoader = new ImageLoader();
+    private KeyHandler keyHandler;
 
     {
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -42,26 +42,25 @@ public class GamePanel extends JPanel implements Runnable {
         this.scale = 3;
         this.originalTileSize = 16;
         this.tileSize = this.originalTileSize * this.scale;
-
-        this.player = new Player(this);
-
         this.screenWidth = Main.window.getWidth();
         this.screenHeight = Main.window.getHeight();
-
         this.maxScreenCol = this.screenWidth / this.tileSize;
         this.maxScreenRow = this.screenHeight / this.tileSize;
 
         this.modelLoader = new ModelLoader(this);
+        this.keyHandler = new KeyHandler(this);
         this.graphic = new Graphic(this);
         this.sound = new Sound(this);
-
         this.mouse = new Mouse(this);
         this.map = new Map(this);
 
+        this.player = new Player(this);
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
+
         this.modelLoader.setTrees(600);
         this.modelLoader.setUnits(10);
+
     }
 
     public GamePanel() {
@@ -71,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addMouseListener(mouse);
         this.addMouseMotionListener(mouse);
         this.setFocusable(true);
+        this.addKeyListener(keyHandler);
     }
 
     @Override
@@ -104,29 +104,14 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(41, 24, 42));
 
-        //draw background
         map.draw(g2);
         graphic.drawDragMark(g2);
         graphic.drawRectangle(g2);
 
-
-        for (Unit u : unitList) {
-            u.draw(g2);
-        }
-
-        if (getPlayer().isBuilding()) {
-
-            getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() ,
-                    getPlayer().getNewBuilding().getWorldY() );
-        }
-
-        for (Building b : getPlayer().getBuildings()) {
-            b.draw(g2);
-        }
-
-        for (Object ob : objects) {
-            ob.draw(g2);
-        }
+        for (Unit u : unitList) {u.draw(g2);}
+        for (Object ob : objects) {ob.draw(g2);}
+        if (getPlayer().isBuilding()) {getPlayer().drawNewBuilding(g2, getPlayer().getNewBuilding().getWorldX() , getPlayer().getNewBuilding().getWorldY() );}
+        for (Building b : getPlayer().getBuildings()) {b.draw(g2);}
 
         graphic.drawUtil(g2);
         graphic.drawBuildBar(g2);

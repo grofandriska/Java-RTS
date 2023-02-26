@@ -166,6 +166,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     public void locateCursor(MouseEvent me) {
         this.cursor = new Rectangle(me.getX() + screenAdjustValueX, me.getY() + screenAdjustValueY, 1, 1);
+        System.out.println(""+me.getX() + screenAdjustValueX + " + " +me.getY() + screenAdjustValueY);
     }
 
     public void selectDeSelectUnit(MouseEvent me) {

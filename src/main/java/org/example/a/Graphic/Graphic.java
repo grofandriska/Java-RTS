@@ -66,7 +66,7 @@ public class Graphic {
                 g2.drawRoundRect(u.getWorldX() + 9 - gamePanel.getMouse().getScreenAdjustValueX(), u.getWorldY() + 25 - gamePanel.getMouse().getScreenAdjustValueY(), 30, 30, 30, 30);
 
                 g2.setColor(new Color(150, 10, 10, 125));
-                g2.fillRoundRect(u.getWorldX() - gamePanel.getMouse().getScreenAdjustValueX() + 9, u.getWorldY() - gamePanel.getMouse().getScreenAdjustValueY() + 25, 30, 30, 30, 30);
+                g2.fillRoundRect(u.getWorldX() + 9 - gamePanel.getMouse().getScreenAdjustValueX(), u.getWorldY()+ 25 - gamePanel.getMouse().getScreenAdjustValueY() , 30, 30, 30, 30);
             }
         }
     }

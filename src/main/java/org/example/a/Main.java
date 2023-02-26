@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         GamePanel gamePanel = new GamePanel();
-        gamePanel.startGameThread();
+
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
@@ -24,7 +24,7 @@ public class Main {
         window.add(gamePanel);
         window.pack();
         window.setVisible(true);
-
+        gamePanel.startGameThread();
 
     }
 }
