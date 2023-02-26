@@ -19,7 +19,14 @@ diversity of creatures and game logic and actions
 for player, maybe Hero and Mob style game.
 
 Move mouse, select or drag and use right click to 
-order characters , so far ... 
+order characters, so far... 
+
+Left click - select and deselect and apply build
+Left click + drag - select multiple unit
+
+Right click - add new goal to unit
+
+if not valid goal, unit generates new random goal.
 
 
 
