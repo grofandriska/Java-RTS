@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
-        this.modelLoader.setTrees(360);
+        this.modelLoader.setTrees(600);
         this.modelLoader.setUnits(10);
     }
 

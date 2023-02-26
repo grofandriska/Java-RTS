@@ -29,10 +29,12 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
 
     public Mouse(GamePanel gamePanel) {
+        System.out.println("Creating mouse ...");
         this.gamePanel = gamePanel;
         this.graphic = new Graphic(gamePanel);
         this.sound = new Sound(gamePanel);
         this.modelLoader = new ModelLoader(gamePanel);
+        System.out.println("mouse Done");
     }
 
     @Override
@@ -48,6 +50,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
         }
         if (e.getButton() == MouseEvent.BUTTON3) {
             gamePanel.getPlayer().moveUnit(e, screenAdjustValueX, screenAdjustValueY);
+            graphic.showClick(e.getX(),getMouseY());
         }
     }
 

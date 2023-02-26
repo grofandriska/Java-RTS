@@ -26,6 +26,7 @@ public class Graphic {
 
 
     public Graphic(GamePanel gamePanel) {
+        System.out.println("Creating graphics");
         this.fontCollection = new FontCollection();
         this.clickDrawCounter = 0;
         this.gamePanel = gamePanel;
@@ -33,10 +34,11 @@ public class Graphic {
         this.scrollImage = imageLoader.setup("/scroll", gamePanel.getScreenWidth() + 350, 300);
         this.buttons = new ArrayList<>();
         initButtonImg();
+        System.out.println("graphics created");
     }
 
     public void initButtonImg() {
-
+        System.out.println("init button images");
         int x = gamePanel.getScreenWidth() - 400, y = gamePanel.getScreenHeight() - 150;
         int counter = 0;
         int buttonCounter = 0;
@@ -51,6 +53,7 @@ public class Graphic {
                 y += 68;
             }
         }
+        System.out.println("init done");
     }
 
     public void drawDragMark(Graphics2D g2) {
@@ -114,6 +117,7 @@ public class Graphic {
     }
 
     public void decorateScreen(Graphics2D g2) {
+
         g2.drawImage(scrollImage, -165, gamePanel.getScreenHeight() - 215, null);
         g2.drawImage(scrollImage, -165, -125, null);
 

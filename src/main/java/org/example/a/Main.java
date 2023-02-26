@@ -14,17 +14,17 @@ public class Main {
     public static Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
 
     public static void main(String[] args) {
+        GamePanel gamePanel = new GamePanel();
+        gamePanel.startGameThread();
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Explore");
 
-        GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
         window.setVisible(true);
 
 
-        gamePanel.startGameThread();
     }
 }

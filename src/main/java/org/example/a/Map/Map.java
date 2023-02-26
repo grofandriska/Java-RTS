@@ -56,7 +56,6 @@ public class Map {
         int worldCol = 0;
         int worldRow = 0;
 
-        int counter = 0;
         while (worldCol < maxWorldCol && worldRow < maxWorldRow) {
 
             int tileNum = mapTileNum[worldCol][worldRow];
@@ -68,8 +67,7 @@ public class Map {
             int screenY = worldY - gamePanel.getPlayer().getScreenY();
 
             g.drawImage(tiles[tileNum].getImage(), screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize(), null);
-            g.drawString("["+counter+"]",screenX+24,screenY+24);
-            counter++;
+
             worldCol++;
 
             if (worldCol == maxWorldCol) {

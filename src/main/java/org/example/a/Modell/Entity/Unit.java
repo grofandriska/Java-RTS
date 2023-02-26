@@ -7,6 +7,7 @@ import org.example.a.Modell.Object.Tree;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Unit {
 
@@ -72,8 +73,13 @@ public class Unit {
                 }
             }
         }
+        else {generateNewGoal();}
     }
 
+    public void generateNewGoal() {
+        this.goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenWidth());
+        this.goalY = ThreadLocalRandom.current().nextInt(0, gamePanel.getScreenHeight());
+    }
     public boolean checkBorder(Unit unit) {
         return unit.getGoalX() >= 0 && unit.getGoalX() <= gamePanel.getMap().getMapSize() * gamePanel.getTileSize()
                 && unit.getGoalY() >= 0 && unit.getGoalY() <= gamePanel.getMap().getMapSize() * gamePanel.getTileSize();
