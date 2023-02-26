@@ -21,12 +21,16 @@ public class ModelLoader {
     private static ArrayList<Building> buildings;
 
     public ModelLoader(GamePanel gamePanel) {
+
+        System.out.println("\n");
+        System.out.println("*****************************************************************");
         System.out.println("creating modelLoader");
         this.gamePanel = gamePanel;
         this.imageLoader = new ImageLoader();
         buildings = new ArrayList<>();
         setBuildings();
         System.out.println(" modelLoader Done");
+        System.out.println("\n");
 
     }
 
@@ -50,7 +54,7 @@ public class ModelLoader {
     }
 
     public void setUnits(int size) {
-
+        System.out.println(" - Init Units");
         int counter = 0;
 
         while (counter != size) {
@@ -66,11 +70,10 @@ public class ModelLoader {
             System.out.println(counter + " Unit initialized");
             counter++;
         }
-        System.out.println("***********************************************************");
     }
 
     public void setBuildings() {
-        System.out.println("Initializing setBuildings()");
+        System.out.println(" - Initializing setBuildings()");
         Building archery = new Building(10, 500, 1150, 0, 0, 0, "Archery",
                 imageLoader.setup("/Images/Building/archery_range", 305 / 2, 222 / 2),
                 new Rectangle(0, 0, 0, 0), gamePanel);
@@ -115,7 +118,7 @@ public class ModelLoader {
 
         System.out.println("setBuildings() Done");
 
-        System.out.println("*****************************************************************");
+
 
     }
 

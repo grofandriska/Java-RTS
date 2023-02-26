@@ -29,12 +29,16 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
 
     public Mouse(GamePanel gamePanel) {
+
+        System.out.println("\n");
+        System.out.println("*****************************************************************");
         System.out.println("Creating mouse ...");
         this.gamePanel = gamePanel;
         this.graphic = new Graphic(gamePanel);
         this.sound = new Sound(gamePanel);
         this.modelLoader = new ModelLoader(gamePanel);
         System.out.println("mouse Done");
+        System.out.println("\n");
     }
 
     @Override
