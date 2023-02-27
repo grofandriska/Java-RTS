@@ -20,7 +20,7 @@ public class Tree extends Object {
         super.setCollision(true);
         super.setWorldX(worldX);
         super.setWorldY(worldY);
-        this.solidArea = new Rectangle(getWorldX() + getImage().getWidth() / 4, getWorldY(), getImage().getWidth() / 2, getImage().getHeight());
+        this.solidArea = new Rectangle(getWorldX() + getImage().getWidth()/4, getWorldY(), getImage().getWidth()/2,getImage().getHeight());
 
     }
 
@@ -52,6 +52,5 @@ public class Tree extends Object {
         int screenX = getWorldX() - gamePanel.getPlayer().getScreenX();
         int screenY = getWorldY() - gamePanel.getPlayer().getScreenY();
         g2.drawImage(super.getImage(), screenX, screenY, null);
-
     }
 }

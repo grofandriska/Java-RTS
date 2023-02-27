@@ -27,7 +27,6 @@ public class Graphic {
 
     public Graphic(GamePanel gamePanel) {
         System.out.println("\n");
-        System.out.println("*****************************************************************");
         System.out.println("Creating graphics");
         this.fontCollection = new FontCollection();
         this.clickDrawCounter = 0;
@@ -36,7 +35,7 @@ public class Graphic {
         this.scrollImage = imageLoader.setup("/scroll", gamePanel.getScreenWidth() + 350, 300);
         this.buttons = new ArrayList<>();
         initButtonImg();
-        System.out.println("graphics created");
+        System.out.println("Graphics created");
         System.out.println("\n");
     }
 

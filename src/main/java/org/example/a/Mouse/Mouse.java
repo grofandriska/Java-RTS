@@ -25,20 +25,13 @@ public class Mouse implements MouseListener, MouseMotionListener {
     private ModelLoader modelLoader;
     private Sound sound;
 
-    public boolean moveUp = false, moveDown = false, moveLeft = false, MoveRight = false;
 
 
     public Mouse(GamePanel gamePanel) {
-
-        System.out.println("\n");
-        System.out.println("*****************************************************************");
-        System.out.println("Creating mouse ...");
         this.gamePanel = gamePanel;
         this.graphic = new Graphic(gamePanel);
         this.sound = new Sound(gamePanel);
         this.modelLoader = new ModelLoader(gamePanel);
-        System.out.println("mouse Done");
-        System.out.println("\n");
     }
 
     @Override
@@ -54,7 +47,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
         }
         if (e.getButton() == MouseEvent.BUTTON3) {
             gamePanel.getPlayer().moveUnit(e, screenAdjustValueX, screenAdjustValueY);
-            graphic.showClick(e.getX(),getMouseY());
+            graphic.showClick(e.getX(), getMouseY());
         }
     }
 
@@ -75,8 +68,8 @@ public class Mouse implements MouseListener, MouseMotionListener {
         this.mouseY = e.getY();
 
         if (gamePanel.getPlayer().isBuilding()) {
-            gamePanel.getPlayer().getNewBuilding().setWorldX(mouseX-gamePanel.getPlayer().getNewBuilding().getImage().getWidth()/2);
-            gamePanel.getPlayer().getNewBuilding().setWorldY(mouseY-gamePanel.getPlayer().getNewBuilding().getImage().getHeight()/2);
+            gamePanel.getPlayer().getNewBuilding().setWorldX(mouseX - gamePanel.getPlayer().getNewBuilding().getImage().getWidth() / 2);
+            gamePanel.getPlayer().getNewBuilding().setWorldY(mouseY - gamePanel.getPlayer().getNewBuilding().getImage().getHeight() / 2);
         }
         moveCamera();
 
@@ -113,7 +106,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     public void setDragSize(MouseEvent e) {
         if (dragRectangle != null) {
             this.dragRectangle.width = e.getX() + screenAdjustValueX - this.dragRectangle.x;
-            this.dragRectangle.height = e.getY()+ screenAdjustValueY - this.dragRectangle.y;
+            this.dragRectangle.height = e.getY() + screenAdjustValueY - this.dragRectangle.y;
         }
     }
 
@@ -140,7 +133,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
     }
 
     public void initDrag(MouseEvent me) {
-        if (this.dragRectangle == null && leftClicked ) {
+        if (this.dragRectangle == null && leftClicked) {
             setMouseDragged(true);
             this.dragRectangle = new Rectangle(me.getX() + screenAdjustValueX, me.getY() + screenAdjustValueY, 0, 0);
         }
@@ -162,7 +155,7 @@ public class Mouse implements MouseListener, MouseMotionListener {
 
     public void locateCursor(MouseEvent me) {
         this.cursor = new Rectangle(me.getX() + screenAdjustValueX, me.getY() + screenAdjustValueY, 1, 1);
-        System.out.println(""+me.getX() + screenAdjustValueX + " + " +me.getY() + screenAdjustValueY);
+        System.out.println("" + me.getX() + screenAdjustValueX + " + " + me.getY() + screenAdjustValueY);
     }
 
     public void selectDeSelectUnit(MouseEvent me) {

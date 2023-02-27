@@ -52,7 +52,7 @@ public class Unit {
     }
 
     public void moveUnit() {
-
+        if (checkBorder()) {
             if (getWorldX() != this.goalX || getWorldY() != this.goalY) {
                 if (getGoalX() < getWorldX()) {
                     setWorldX(getWorldX() - 1);
@@ -71,7 +71,11 @@ public class Unit {
                     getSolidArea().y = getWorldY();
                 }
             }
+        }
+    }
 
+    private boolean checkBorder() {
+        return getGoalX() >= 0 && goalY >= 0;
     }
 
     public boolean isSelected() {

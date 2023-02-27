@@ -99,14 +99,18 @@ public class Player {
         return true;
     }
 
+    private boolean checkBorder(int x, int y) {
+        return x > 0 && y > 0 && x < gamePanel.getMap().getMapSize() * gamePanel.getTileSize() && y < gamePanel.getMap().getMapSize() * gamePanel.getTileSize();
+    }
+
     public void checkBuild(MouseEvent me, int adjX, int adjY) {
-        if (checkBuildValue()) {
-            buildings.sort(Comparator.comparing(Building::getWorldY));
+        if (checkBuildValue() && checkBorder((me.getX() + adjX) - getNewBuilding().getImage().getWidth() / 2, me.getY() + adjY - getNewBuilding().getImage().getHeight() / 2)) {
             this.newBuilding.setWorldX((me.getX() + adjX) - getNewBuilding().getImage().getWidth() / 2);
             this.newBuilding.setWorldY((me.getY() + adjY) - getNewBuilding().getImage().getHeight() / 2);
             this.newBuilding.setSolidArea(new Rectangle(this.newBuilding.getWorldX(), this.newBuilding.getWorldY(), this.newBuilding.getImage().getWidth(), this.newBuilding.getImage().getHeight()));
-            this.buildings.add(newBuilding);
             gamePanel.getObjects().removeIf(t -> t.getSolidArea().intersects(newBuilding.getSolidArea()));
+            this.buildings.add(newBuilding);
+            buildings.sort(Comparator.comparing(Building::getWorldY));
             this.isBuilding = false;
             this.newBuilding = null;
         }

@@ -16,40 +16,29 @@ public class ModelLoader {
 
     private GamePanel gamePanel;
 
-    public ImageLoader imageLoader;
+    private ImageLoader imageLoader;
 
     private static ArrayList<Building> buildings;
 
     public ModelLoader(GamePanel gamePanel) {
 
-        System.out.println("\n");
-        System.out.println("*****************************************************************");
-        System.out.println("creating modelLoader");
         this.gamePanel = gamePanel;
         this.imageLoader = new ImageLoader();
         buildings = new ArrayList<>();
         setBuildings();
-        System.out.println(" modelLoader Done");
-        System.out.println("\n");
-
     }
 
     public void setTrees(int size) {
 
-        int counter = 0;
-        System.out.println(" ModelLoader.setTrees() ");
+        int counter = -1;
         while (counter != size) {
+            counter++;
 
-            int goalX = ThreadLocalRandom.current().nextInt(0, gamePanel.getMap().getMapSize() * gamePanel.getTileSize());
-            int goalY = ThreadLocalRandom.current().nextInt(0, gamePanel.getMap().getMapSize() * gamePanel.getTileSize());
-
+            int goalX = ThreadLocalRandom.current().nextInt(0, (gamePanel.getMap().getMapSize() * gamePanel.getTileSize())-100);
+            int goalY = ThreadLocalRandom.current().nextInt(0, (gamePanel.getMap().getMapSize() * gamePanel.getTileSize())-100);
 
             this.gamePanel.getObjects().add(new Tree(goalX, goalY, this.gamePanel));
-            System.out.println(counter + " Tree initialized");
-
-            counter++;
         }
-        System.out.println("***********************************************************");
         gamePanel.getObjects().sort(Comparator.comparing(Object::getWorldY));
     }
 
@@ -119,7 +108,6 @@ public class ModelLoader {
         System.out.println("setBuildings() Done");
 
 
-
     }
 
     public GamePanel getGamePanel() {
@@ -128,6 +116,14 @@ public class ModelLoader {
 
     public void setGamePanel(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+    }
+
+    public ImageLoader getImageLoader() {
+        return imageLoader;
+    }
+
+    public void setImageLoader(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
     }
 
     public static ArrayList<Building> getBuildings() {
