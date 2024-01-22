@@ -8,18 +8,28 @@ import java.awt.image.BufferedImage;
 
 public class Building {
 
-    public GamePanel gamePanel;
+    private boolean selected = false;
     private int size, hitPoint, woodValue, stoneValue, goldValue, foodValue, worldX, worldY;
     private String name;
-    private BufferedImage image;
+    public GamePanel gamePanel;
     private Rectangle solidArea;
+    private BufferedImage image;
+
 
     public Building() {
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     public Building(int size, int hitPoint, int woodValue,
                     int stoneValue, int goldValue, int foodValue,
-                    String name, BufferedImage image, Rectangle solidArea,GamePanel gamePanel) {
+                    String name, BufferedImage image, Rectangle solidArea, GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.size = size;
         this.hitPoint = hitPoint;

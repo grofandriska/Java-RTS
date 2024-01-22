@@ -11,16 +11,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Player {
-
     private GamePanel gamePanel;
-
     private Integer wood, food, gold, stone, screenX, screenY;
-
     private ArrayList<Unit> unitList;
     private ArrayList<Building> buildings;
-
     private Building newBuilding;
-
     private boolean isBuilding = false, followUnit = false;
 
     {
@@ -34,8 +29,8 @@ public class Player {
 
     public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        screenX = 0;
-        screenY = 0;
+        this.screenX = 0;
+        this.screenY = 0;
     }
 
     public void moveUnit(MouseEvent me, int adjX, int adjY) {
@@ -47,11 +42,19 @@ public class Player {
         if (gamePanel.getMouse().clickedOnScreen(me)) {
             for (Unit u : gamePanel.getUnitList()) {
                 if (u.isSelected()) {
-                    u.setGoals(me.getX() + (col * space) + adjX, me.getY() + (row * space) + adjY);
-                    col++;
-                    if (col == 3) {
-                        col = 0;
-                        row++;
+                    if (buildings.isEmpty()) {
+                        u.setGoals(me.getX() + (col * space) + adjX, me.getY() + (row * space) + adjY);
+                    } else {
+                        for (int i = 0; i < buildings.size(); i++) {
+                            if (!new Rectangle(me.getX(), me.getY(), 15, 15).intersects(buildings.get(i).getSolidArea())) {
+                                u.setGoals(me.getX() + (col * space) + adjX, me.getY() + (row * space) + adjY);
+                                col++;
+                                if (col == 3) {
+                                    col = 0;
+                                    row++;
+                                }
+                            }
+                        }
                     }
                 }
             }

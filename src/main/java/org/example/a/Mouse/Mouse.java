@@ -14,16 +14,16 @@ import java.util.ArrayList;
 
 public class Mouse implements MouseListener, MouseMotionListener {
 
-    private final Graphic graphic;
-    private GamePanel gamePanel;
+    private boolean leftClicked;
+    private boolean mouseDragged;
     private Integer mouseX, mouseY, dragStartX, dragStartY;
     private Integer screenAdjustValueX = 0, screenAdjustValueY = 0;
     private Rectangle cursor, dragRectangle;
-    private boolean mouseDragged;
-    private boolean leftClicked;
+    private GamePanel gamePanel;
     private Building building;
     private ModelLoader modelLoader;
     private Sound sound;
+    private final Graphic graphic;
 
 
 
@@ -43,7 +43,6 @@ public class Mouse implements MouseListener, MouseMotionListener {
             }
             leftClicked = true;
             checkClick(e);
-
         }
         if (e.getButton() == MouseEvent.BUTTON3) {
             gamePanel.getPlayer().moveUnit(e, screenAdjustValueX, screenAdjustValueY);
@@ -51,9 +50,11 @@ public class Mouse implements MouseListener, MouseMotionListener {
         }
     }
 
+    ///!!!!!!!!!!!!
     public void checkClick(MouseEvent me) {
         locateCursor(me);
         selectDeSelectUnit(me);
+        selectDeSelectBuilding(me);
         cursor = null;
 
         locateCursorOnScreen(me);
@@ -165,6 +166,15 @@ public class Mouse implements MouseListener, MouseMotionListener {
             }
             if (!u.getSolidArea().intersects(cursor) && me.getButton() == MouseEvent.BUTTON1) {
                 u.setSelected(false);
+            }
+        }
+    }  public void selectDeSelectBuilding(MouseEvent me) {
+        for (Building b: gamePanel.getPlayer().getBuildings()){
+            if (b.getSolidArea().intersects(cursor) && me.getButton() == MouseEvent.BUTTON1) {
+                b.setSelected(true);
+            }
+            if (!(b.getSolidArea().intersects(cursor) && me.getButton() == MouseEvent.BUTTON1)) {
+                b.setSelected(false);
             }
         }
     }

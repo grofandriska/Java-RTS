@@ -26,8 +26,8 @@ public class Graphic {
 
 
     public Graphic(GamePanel gamePanel) {
-        System.out.println("\n");
-        System.out.println("Creating graphics");
+        System.out.println("\nCreating graphics");
+        //make it static
         this.fontCollection = new FontCollection();
         this.clickDrawCounter = 0;
         this.gamePanel = gamePanel;
@@ -173,6 +173,44 @@ public class Graphic {
                 }
             }
         }
+        for (Building b :getGamePanel().getPlayer().getBuildings()){
+            if (b.isSelected()) {
+                int x = gamePanel.getScreenWidth() - 400, y = gamePanel.getScreenHeight() - 150;
+                int counter = 0;
+                for (Building building : ModelLoader.getBuildings()) {
+                    g2.setColor(new Color(0, 0, 0));
+                    g2.fillRect(x, y, 64, 64);
+                    g2.drawImage(imageLoader.scaleImage(building.getImage(), 64, 64), x, y, null);
+                    x += 68;
+                    counter++;
+                    if (counter == 4) {
+                        counter = 0;
+                        x -= 4 * 68;
+                        y += 68;
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void drawClickalbe(){
+        int x = gamePanel.getScreenWidth() - 400, y = gamePanel.getScreenHeight() - 150;
+        int counter = 0;
+
+        for ( int i = 0; i < 3 ;i ++ ){
+            g2.setColor(new Color(0, 0, 0));
+            g2.fillRect(x, y, 64, 64);
+            g2.drawRect(x,y,64,64);
+            x += 68;
+            counter++;
+            if (counter == 4) {
+                counter = 0;
+                x -= 4 * 68;
+                y += 68;
+            }
+        }
+
     }
 
     public FontCollection getFontCollection() {

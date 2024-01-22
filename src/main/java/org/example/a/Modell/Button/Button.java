@@ -4,11 +4,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Button {
-
     private String name;
-
     private BufferedImage image;
-
     private Rectangle solidArea;
 
     public Button() {

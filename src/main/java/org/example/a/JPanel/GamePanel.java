@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Sound sound;
     private ArrayList<Tree> objects;
     private ArrayList<Unit> unitList;
-    public ArrayList<Building> buildings = new ArrayList<>();
+    public ArrayList<Building> buildings;
     private Map map;
     private Player player;
     private ModelLoader modelLoader;
@@ -52,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.sound = new Sound(this);
         this.mouse = new Mouse(this);
         this.map = new Map(this);
-
+        this.buildings = new ArrayList<>();
         this.player = new Player(this);
         this.objects = new ArrayList<>();
         this.unitList = new ArrayList<>();
@@ -63,7 +63,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension((this.maxScreenCol * this.tileSize), (int) ((this.maxScreenRow + 0.5) * this.tileSize)));
+        this.setPreferredSize(new Dimension((this.maxScreenCol * this.tileSize),
+                (int) ((this.maxScreenRow + 0.5) * this.tileSize)));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addMouseListener(mouse);
@@ -87,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
                 update();
                 repaint();
                 delta--;
+
             }
         }
     }

@@ -13,15 +13,10 @@ import java.util.Comparator;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ModelLoader {
-
     private GamePanel gamePanel;
-
     private ImageLoader imageLoader;
-
     private static ArrayList<Building> buildings;
-
     public ModelLoader(GamePanel gamePanel) {
-
         this.gamePanel = gamePanel;
         this.imageLoader = new ImageLoader();
         buildings = new ArrayList<>();
@@ -29,8 +24,8 @@ public class ModelLoader {
     }
 
     public void setTrees(int size) {
-
         int counter = -1;
+
         while (counter != size) {
             counter++;
 
@@ -104,26 +99,7 @@ public class ModelLoader {
         buildings.add(house1);
         buildings.add(house2);
         buildings.add(stable);
-
         System.out.println("setBuildings() Done");
-
-
-    }
-
-    public GamePanel getGamePanel() {
-        return gamePanel;
-    }
-
-    public void setGamePanel(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-    }
-
-    public ImageLoader getImageLoader() {
-        return imageLoader;
-    }
-
-    public void setImageLoader(ImageLoader imageLoader) {
-        this.imageLoader = imageLoader;
     }
 
     public static ArrayList<Building> getBuildings() {
@@ -167,5 +143,21 @@ public class ModelLoader {
 
     public static void setBuildings(ArrayList<Building> buildings) {
         ModelLoader.buildings = buildings;
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
+    public ImageLoader getImageLoader() {
+        return imageLoader;
+    }
+
+    public void setImageLoader(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
     }
 }
